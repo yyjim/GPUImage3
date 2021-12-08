@@ -196,6 +196,15 @@ public class ShaderUniformSettings {
             renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: 1)
         }
     }
+
+    public func setVertexBuffer(renderEncoder: MTLRenderCommandEncoder, index: Int) {
+        guard (uniformValues.count > 0) else { return }
+
+        let uniformBuffer = sharedMetalRenderingDevice.device.makeBuffer(bytes: uniformValues,
+                                                                         length: uniformValues.count * MemoryLayout<Float>.size,
+                                                                         options: [])!
+        renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, index: index)
+    }
 }
 
 public protocol UniformConvertible {
