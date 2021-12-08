@@ -119,16 +119,16 @@ let filterOperations: Array<FilterOperationInterface> = [
         },
         filterOperationType:.singleInput
     ),
-//    FilterOperation(
-//        filter:{UnsharpMask()},
-//        listName:"Unsharp mask",
-//        titleName:"Unsharp Mask",
-//        sliderConfiguration:.enabled(minimumValue:0.0, maximumValue:5.0, initialValue:1.0),
-//        sliderUpdateCallback: {(filter, sliderValue) in
-//            filter.intensity = sliderValue
-//        },
-//        filterOperationType:.singleInput
-//    ),
+    FilterOperation(
+        filter:{UnsharpMask()},
+        listName:"Unsharp mask",
+        titleName:"Unsharp Mask",
+        sliderConfiguration:.enabled(minimumValue:0.0, maximumValue:5.0, initialValue:1.0),
+        sliderUpdateCallback: {(filter, sliderValue) in
+            filter.intensity = sliderValue
+        },
+        filterOperationType:.singleInput
+    ),
 //    FilterOperation(
 //        filter:{TransformOperation()},
 //        listName:"Transform (2-D)",
