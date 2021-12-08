@@ -54,6 +54,7 @@ extension MTLCommandBuffer {
             textureBuffer.label = "Texture Coordinates"
 
             renderEncoder.setVertexBuffer(textureBuffer, offset: 0, index: 1 + textureIndex)
+            uniformSettings?.setVertexBuffer(renderEncoder: renderEncoder, index: 2 + textureIndex)
             renderEncoder.setFragmentTexture(currentTexture.texture, index: textureIndex)
         }
         uniformSettings?.restoreShaderSettings(renderEncoder: renderEncoder)
