@@ -3,10 +3,10 @@
 using namespace metal;
 
 typedef struct {
-    float2 vignetteCenter;
-    float3 vignetteColor;
     float vignetteStart;
     float vignetteEnd;
+    float2 vignetteCenter;
+    float3 vignetteColor;
 } VignetteUniform;
 
 fragment half4 vignetteFragment(SingleInputVertexIO fragmentInput [[stage_in]],
