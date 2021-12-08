@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -17,6 +17,9 @@ let package = Package(
         .target(
             name: "GPUImage",
             path: "framework/Source",
-            exclude: ["Linux", "Operations/Shaders"])],
+            exclude: ["Linux", "Operations/Shaders"],
+            resources: []
+        ),
+    ],
     swiftLanguageVersions: [.v4_2]
 )
