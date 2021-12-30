@@ -38,18 +38,32 @@ public class RenderView: MTKView, ImageConsumer {
         currentTexture = texture
         self.draw()
     }
-    
+
+
+    // See: https://github.com/BradLarson/GPUImage3/issues/5
+    // The MaxFramesInFlight set to 3. Check MaxFramesInFlight in this link
+    // https://developer.apple.com/documentation/metal/synchronization/synchronizing_cpu_and_gpu_work
+    private let inFlightSemaphore = DispatchSemaphore(value: 3)
+
     public override func draw(_ rect:CGRect) {
-        if let currentDrawable = self.currentDrawable, let imageTexture = currentTexture {
-            let commandBuffer = sharedMetalRenderingDevice.commandQueue.makeCommandBuffer()
-            
-            let outputTexture = Texture(orientation: .portrait, texture: currentDrawable.texture)
-            commandBuffer?.renderQuad(pipelineState: renderPipelineState, inputTextures: [0:imageTexture], outputTexture: outputTexture)
-            
-            commandBuffer?.present(currentDrawable)
-            commandBuffer?.commit()
+        guard let currentDrawable = self.currentDrawable, let imageTexture = currentTexture else {
+            return
         }
+
+        guard let commandBuffer = sharedMetalRenderingDevice.commandQueue.makeCommandBuffer() else {
+            return
+        }
+
+        _ = inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
+        let semaphore = inFlightSemaphore
+        commandBuffer.addCompletedHandler { (_ commandBuffer)-> Swift.Void in
+            semaphore.signal()
+        }
+        let outputTexture = Texture(orientation: .portrait, texture: currentDrawable.texture)
+        commandBuffer.renderQuad(pipelineState: renderPipelineState,
+                                 inputTextures: [0:imageTexture],
+                                 outputTexture: outputTexture)
+        commandBuffer.present(currentDrawable)
+        commandBuffer.commit()
     }
 }
-
-
