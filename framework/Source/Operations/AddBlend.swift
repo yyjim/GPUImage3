@@ -1,11 +1,11 @@
 public class AddBlend: BasicOperation {
 
-    public var opacity: Float = 1 { didSet { uniformSettings["opacity"] = opacity } }
+    public var intensity: Float = 1 { didSet { uniformSettings["intensity"] = intensity } }
 
     public init() {
         super.init(fragmentFunctionName:"addBlendFragment", numberOfInputs:2)
         ({
-            opacity = 1
+            intensity = 1
         })()
     }
 }

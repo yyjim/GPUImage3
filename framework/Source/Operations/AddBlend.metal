@@ -5,7 +5,7 @@ using namespace metal;
 typedef struct
 {
     // 0 - 1
-    float opacity;
+    float intensity;
 } AddBlendUniform;
 
 fragment half4 addBlendFragment(TwoInputVertexIO fragmentInput [[stage_in]],
@@ -17,7 +17,7 @@ fragment half4 addBlendFragment(TwoInputVertexIO fragmentInput [[stage_in]],
     half4 base = inputTexture.sample(quadSampler, fragmentInput.textureCoordinate);
     constexpr sampler quadSampler2;
     half4 overlay = inputTexture2.sample(quadSampler, fragmentInput.textureCoordinate2);
-    overlay.rgb *= uniform.opacity;
+    overlay.rgb *= uniform.intensity;
 
     half r;
     if (overlay.r * base.a + base.r * overlay.a >= overlay.a * base.a) {
