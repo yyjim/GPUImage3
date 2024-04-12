@@ -2,15 +2,23 @@
 #include "OperationShaderTypes.h"
 using namespace metal;
 
+typedef struct
+{
+    // 0 - 1
+    float intensity;
+} AddBlendUniform;
+
 fragment half4 addBlendFragment(TwoInputVertexIO fragmentInput [[stage_in]],
-                                     texture2d<half> inputTexture [[texture(0)]],
-                                     texture2d<half> inputTexture2 [[texture(1)]])
+                                texture2d<half> inputTexture [[texture(0)]],
+                                texture2d<half> inputTexture2 [[texture(1)]],
+                                constant AddBlendUniform& uniform [[ buffer(1) ]])
 {
     constexpr sampler quadSampler;
     half4 base = inputTexture.sample(quadSampler, fragmentInput.textureCoordinate);
     constexpr sampler quadSampler2;
     half4 overlay = inputTexture2.sample(quadSampler, fragmentInput.textureCoordinate2);
-    
+    overlay.rgb *= uniform.intensity;
+
     half r;
     if (overlay.r * base.a + base.r * overlay.a >= overlay.a * base.a) {
         r = overlay.a * base.a + overlay.r * (1.0h - base.a) + base.r * (1.0h - overlay.a);
