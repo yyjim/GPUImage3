@@ -413,7 +413,9 @@
 		FB10DA702AF8F688000B1AEF /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6D2AF8F688000B1AEF /* Grain.metal */; };
 		FB10DA712AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FB10DA722AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
+		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC105032BB6A36000FA0885 /* CBBoxBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */; };
+		FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F52BB6A35F00FA0885 /* CBDilation.metal */; };
 		FBC105062BB6A36000FA0885 /* CBBoxBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */; };
 		FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
 		FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
@@ -631,7 +633,9 @@
 		BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = DissolveBlend.metal; path = Source/Operations/DissolveBlend.metal; sourceTree = "<group>"; };
 		FB10DA6D2AF8F688000B1AEF /* Grain.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Grain.metal; path = Source/Operations/Grain.metal; sourceTree = "<group>"; };
 		FB10DA6E2AF8F688000B1AEF /* Grain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grain.swift; path = Source/Operations/Grain.swift; sourceTree = "<group>"; };
+		FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDilation.swift; path = Source/Operations/CBDilation.swift; sourceTree = "<group>"; };
 		FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBBoxBlur.swift; path = Source/Operations/CBBoxBlur.swift; sourceTree = "<group>"; };
+		FBC104F52BB6A35F00FA0885 /* CBDilation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDilation.metal; path = Source/Operations/CBDilation.metal; sourceTree = "<group>"; };
 		FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBBoxBlur.metal; path = Source/Operations/CBBoxBlur.metal; sourceTree = "<group>"; };
 		FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsharpMask.swift; path = Source/Operations/UnsharpMask.swift; sourceTree = "<group>"; };
 		FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = UnsharpMask.metal; path = Source/Operations/UnsharpMask.metal; sourceTree = "<group>"; };
@@ -950,6 +954,8 @@
 			children = (
 				FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */,
 				FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */,
+				FBC104F52BB6A35F00FA0885 /* CBDilation.metal */,
+				FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */,
 			);
 			name = CB;
 			sourceTree = "<group>";
@@ -1195,6 +1201,7 @@
 				79CB6DDB2108BC700042F87B /* DarkenBlend.metal in Sources */,
 				79EB1B6B2125C7590049135E /* LookupFilter.swift in Sources */,
 				79CB6E2C210A0CDA0042F87B /* ScreenBlend.metal in Sources */,
+				FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */,
 				7957437820FBF4E4001EAE0A /* Haze.metal in Sources */,
 				7971E0C32357B2E9006F150F /* AdaptiveThreshold.metal in Sources */,
 				793D934A20F69A89008A7A6E /* HueAdjustment.metal in Sources */,
@@ -1232,6 +1239,7 @@
 				BCCFEA6422AEEDDB00C9F4CC /* PictureInput.swift in Sources */,
 				FBE32DE62760CA9400DDDE68 /* UnsharpMask.metal in Sources */,
 				7954BF4F2214A78E008402A6 /* SphereRefraction.metal in Sources */,
+				FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */,
 				793D934420F693B8008A7A6E /* GammaAdjustment.metal in Sources */,
 				4CC48C012134440900817C34 /* Solarize.metal in Sources */,
 				7B25C0E92103D5DE000EC621 /* ColorBlend.swift in Sources */,
