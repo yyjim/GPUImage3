@@ -413,9 +413,11 @@
 		FB10DA702AF8F688000B1AEF /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6D2AF8F688000B1AEF /* Grain.metal */; };
 		FB10DA712AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FB10DA722AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
+		FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */; };
 		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC105032BB6A36000FA0885 /* CBBoxBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */; };
 		FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F52BB6A35F00FA0885 /* CBDilation.metal */; };
+		FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */; };
 		FBC105062BB6A36000FA0885 /* CBBoxBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */; };
 		FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
 		FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
@@ -633,9 +635,11 @@
 		BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = DissolveBlend.metal; path = Source/Operations/DissolveBlend.metal; sourceTree = "<group>"; };
 		FB10DA6D2AF8F688000B1AEF /* Grain.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Grain.metal; path = Source/Operations/Grain.metal; sourceTree = "<group>"; };
 		FB10DA6E2AF8F688000B1AEF /* Grain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grain.swift; path = Source/Operations/Grain.swift; sourceTree = "<group>"; };
+		FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDirectionBlur.metal; path = Source/Operations/CBDirectionBlur.metal; sourceTree = "<group>"; };
 		FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDilation.swift; path = Source/Operations/CBDilation.swift; sourceTree = "<group>"; };
 		FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBBoxBlur.swift; path = Source/Operations/CBBoxBlur.swift; sourceTree = "<group>"; };
 		FBC104F52BB6A35F00FA0885 /* CBDilation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDilation.metal; path = Source/Operations/CBDilation.metal; sourceTree = "<group>"; };
+		FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDirectionBlur.swift; path = Source/Operations/CBDirectionBlur.swift; sourceTree = "<group>"; };
 		FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBBoxBlur.metal; path = Source/Operations/CBBoxBlur.metal; sourceTree = "<group>"; };
 		FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsharpMask.swift; path = Source/Operations/UnsharpMask.swift; sourceTree = "<group>"; };
 		FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = UnsharpMask.metal; path = Source/Operations/UnsharpMask.metal; sourceTree = "<group>"; };
@@ -956,6 +960,8 @@
 				FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */,
 				FBC104F52BB6A35F00FA0885 /* CBDilation.metal */,
 				FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */,
+				FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */,
+				FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */,
 			);
 			name = CB;
 			sourceTree = "<group>";
@@ -1106,6 +1112,7 @@
 				795ECAAE21ED2E48000EF927 /* ThresholdSketch.swift in Sources */,
 				79CB6E14210931BE0042F87B /* NormalBlend.swift in Sources */,
 				BC25F89A22C158E600CBBD15 /* BoxBlur.swift in Sources */,
+				FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */,
 				79CB6E0821092E330042F87B /* LuminosityBlend.swift in Sources */,
 				7957438D20FE790E001EAE0A /* LuminanceRangeReduction.swift in Sources */,
 				79A81C882100E1B700A3B43A /* LevelsAdjustment.swift in Sources */,
@@ -1173,6 +1180,7 @@
 				79CB6E112109311C0042F87B /* MultiplyBlend.metal in Sources */,
 				FB10DA6F2AF8F688000B1AEF /* Grain.metal in Sources */,
 				BC7BA28420F59C8E006B5F4B /* MonochromeFilter.metal in Sources */,
+				FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */,
 				FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */,
 				79CB6E20210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B742125CBD50049135E /* AmatorkaFilter.swift in Sources */,
