@@ -417,6 +417,7 @@
 		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC104FF2BB6A36000FA0885 /* CBErosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F02BB6A35F00FA0885 /* CBErosion.swift */; };
 		FBC105012BB6A36000FA0885 /* CBErosion.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F22BB6A35F00FA0885 /* CBErosion.metal */; };
+		FBC105022BB6A36000FA0885 /* CBPerlineNoise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */; };
 		FBC105032BB6A36000FA0885 /* CBBoxBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */; };
 		FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F52BB6A35F00FA0885 /* CBDilation.metal */; };
 		FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */; };
@@ -646,6 +647,7 @@
 		FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDilation.swift; path = Source/Operations/CBDilation.swift; sourceTree = "<group>"; };
 		FBC104F02BB6A35F00FA0885 /* CBErosion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBErosion.swift; path = Source/Operations/CBErosion.swift; sourceTree = "<group>"; };
 		FBC104F22BB6A35F00FA0885 /* CBErosion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBErosion.metal; path = Source/Operations/CBErosion.metal; sourceTree = "<group>"; };
+		FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBPerlineNoise.swift; path = Source/Operations/CBPerlineNoise.swift; sourceTree = "<group>"; };
 		FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBBoxBlur.swift; path = Source/Operations/CBBoxBlur.swift; sourceTree = "<group>"; };
 		FBC104F52BB6A35F00FA0885 /* CBDilation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDilation.metal; path = Source/Operations/CBDilation.metal; sourceTree = "<group>"; };
 		FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDirectionBlur.swift; path = Source/Operations/CBDirectionBlur.swift; sourceTree = "<group>"; };
@@ -983,6 +985,8 @@
 				FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */,
 				FBFD6C642BD690A00068909D /* CBLinearDogeBlend.metal */,
 				FBC104F82BB6A35F00FA0885 /* CBLinearDogeBlend.swift */,
+				FBFD6C662BD690E70068909D /* CBPerlineNoise.metal */,
+				FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */,
 			);
 			name = CB;
 			sourceTree = "<group>";
@@ -1111,6 +1115,7 @@
 				7954BF5E2214CBD5008402A6 /* PrewittEdgeDetection.swift in Sources */,
 				BC5193B52208F8D400DD18F6 /* Pixellate.metal in Sources */,
 				BCC6AB69210E62EB00F9803A /* Convolution3x3.swift in Sources */,
+				FBFD6C672BD690E70068909D /* CBPerlineNoise.metal in Sources */,
 				BC7BA28120F599DD006B5F4B /* MonochromeFilter.swift in Sources */,
 				79A81CA9210126BB00A3B43A /* HighlightAndShadowTint.metal in Sources */,
 				795ECAC321EF961F000EF927 /* LocalBinaryPattern.metal in Sources */,
@@ -1316,6 +1321,7 @@
 				793D934720F69A7F008A7A6E /* HueAdjustment.swift in Sources */,
 				793D933B20F6908A008A7A6E /* SaturationAdjustment.swift in Sources */,
 				79A81C912100F0EE00A3B43A /* OpacityAdjustment.metal in Sources */,
+				FBC105022BB6A36000FA0885 /* CBPerlineNoise.swift in Sources */,
 				795ECA7421E903E2000EF927 /* ToonFilter.swift in Sources */,
 				BC25F8AF22C2B3F700CBBD15 /* HighPassFilter.swift in Sources */,
 				795ECAC021EF95EB000EF927 /* LocalBinaryPattern.swift in Sources */,
