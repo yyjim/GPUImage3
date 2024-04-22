@@ -421,6 +421,8 @@
 		FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F52BB6A35F00FA0885 /* CBDilation.metal */; };
 		FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */; };
 		FBC105062BB6A36000FA0885 /* CBBoxBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */; };
+		FBC105082BB6A36000FA0885 /* CBHSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F92BB6A35F00FA0885 /* CBHSV.swift */; };
+		FBC105092BB6A36000FA0885 /* CBHSV.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104FA2BB6A35F00FA0885 /* CBHSV.metal */; };
 		FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
 		FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
 		FBE32DE62760CA9400DDDE68 /* UnsharpMask.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */; };
@@ -645,6 +647,8 @@
 		FBC104F52BB6A35F00FA0885 /* CBDilation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDilation.metal; path = Source/Operations/CBDilation.metal; sourceTree = "<group>"; };
 		FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDirectionBlur.swift; path = Source/Operations/CBDirectionBlur.swift; sourceTree = "<group>"; };
 		FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBBoxBlur.metal; path = Source/Operations/CBBoxBlur.metal; sourceTree = "<group>"; };
+		FBC104F92BB6A35F00FA0885 /* CBHSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBHSV.swift; path = Source/Operations/CBHSV.swift; sourceTree = "<group>"; };
+		FBC104FA2BB6A35F00FA0885 /* CBHSV.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBHSV.metal; path = Source/Operations/CBHSV.metal; sourceTree = "<group>"; };
 		FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsharpMask.swift; path = Source/Operations/UnsharpMask.swift; sourceTree = "<group>"; };
 		FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = UnsharpMask.metal; path = Source/Operations/UnsharpMask.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -968,6 +972,8 @@
 				FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */,
 				FBC104F22BB6A35F00FA0885 /* CBErosion.metal */,
 				FBC104F02BB6A35F00FA0885 /* CBErosion.swift */,
+				FBC104FA2BB6A35F00FA0885 /* CBHSV.metal */,
+				FBC104F92BB6A35F00FA0885 /* CBHSV.swift */,
 			);
 			name = CB;
 			sourceTree = "<group>";
@@ -1207,6 +1213,7 @@
 				FBC104FF2BB6A36000FA0885 /* CBErosion.swift in Sources */,
 				BC7FC40C212B2B3800B37FB6 /* OperationGroup.swift in Sources */,
 				79DD50CA21345492004EF308 /* Vignette.swift in Sources */,
+				FBC105092BB6A36000FA0885 /* CBHSV.metal in Sources */,
 				793D933520F68C1B008A7A6E /* ContrastAdjustment.swift in Sources */,
 				79A81CA321010A2E00A3B43A /* Vibrance.metal in Sources */,
 				79CB6DF3210927180042F87B /* HardLightBlend.metal in Sources */,
@@ -1274,6 +1281,7 @@
 				BC7BA27720F2C269006B5F4B /* BrightnessAdjustment.swift in Sources */,
 				7954BF4C2214A782008402A6 /* SphereRefraction.swift in Sources */,
 				7942F3852219F415005FB6AF /* GlassSphere.swift in Sources */,
+				FBC105082BB6A36000FA0885 /* CBHSV.swift in Sources */,
 				79CB6DCC2108B1B10042F87B /* ColorBurnBlend.swift in Sources */,
 				79CB6DF9210928C90042F87B /* HueBlend.metal in Sources */,
 				7954BF612214CBE6008402A6 /* PrewittEdgeDetection.metal in Sources */,
