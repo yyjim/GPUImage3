@@ -413,6 +413,8 @@
 		FB10DA702AF8F688000B1AEF /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6D2AF8F688000B1AEF /* Grain.metal */; };
 		FB10DA712AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FB10DA722AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
+		FBC104C52BB64C4D00FA0885 /* Kirakira.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104C42BB64C4D00FA0885 /* Kirakira.swift */; };
+		FBC104C62BB64C4D00FA0885 /* Kirakira.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104C42BB64C4D00FA0885 /* Kirakira.swift */; };
 		FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */; };
 		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC104FD2BB6A36000FA0885 /* CBKirakiraLightExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */; };
@@ -645,6 +647,7 @@
 		BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = DissolveBlend.metal; path = Source/Operations/DissolveBlend.metal; sourceTree = "<group>"; };
 		FB10DA6D2AF8F688000B1AEF /* Grain.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Grain.metal; path = Source/Operations/Grain.metal; sourceTree = "<group>"; };
 		FB10DA6E2AF8F688000B1AEF /* Grain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grain.swift; path = Source/Operations/Grain.swift; sourceTree = "<group>"; };
+		FBC104C42BB64C4D00FA0885 /* Kirakira.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kirakira.swift; path = Source/Kirakira.swift; sourceTree = "<group>"; };
 		FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDirectionBlur.metal; path = Source/Operations/CBDirectionBlur.metal; sourceTree = "<group>"; };
 		FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDilation.swift; path = Source/Operations/CBDilation.swift; sourceTree = "<group>"; };
 		FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBKirakiraLightExtractor.swift; path = Source/Operations/CBKirakiraLightExtractor.swift; sourceTree = "<group>"; };
@@ -741,6 +744,7 @@
 				795ECA7C21E9095A000EF927 /* ZoomBlur.metal */,
 				FB10DA6E2AF8F688000B1AEF /* Grain.swift */,
 				FB10DA6D2AF8F688000B1AEF /* Grain.metal */,
+				FBC104C42BB64C4D00FA0885 /* Kirakira.swift */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -1218,6 +1222,7 @@
 				79CB6E20210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B742125CBD50049135E /* AmatorkaFilter.swift in Sources */,
 				793D932920F66C5C008A7A6E /* ColorInversion.swift in Sources */,
+				FBC104C52BB64C4D00FA0885 /* Kirakira.swift in Sources */,
 				7957438720FE3CF1001EAE0A /* HighlightsAndShadows.swift in Sources */,
 				79CB6E1A210933A60042F87B /* OverlayBlend.swift in Sources */,
 				795ECA9921ED177D000EF927 /* PolarPixellate.metal in Sources */,
@@ -1437,6 +1442,7 @@
 				79CB6E21210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B752125CBD50049135E /* AmatorkaFilter.swift in Sources */,
 				793D932A20F66C5C008A7A6E /* ColorInversion.swift in Sources */,
+				FBC104C62BB64C4D00FA0885 /* Kirakira.swift in Sources */,
 				7957438820FE3CF1001EAE0A /* HighlightsAndShadows.swift in Sources */,
 				79CB6E1B210933A60042F87B /* OverlayBlend.swift in Sources */,
 				795ECA9A21ED177D000EF927 /* PolarPixellate.metal in Sources */,
