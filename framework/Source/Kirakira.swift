@@ -8,27 +8,6 @@
 
 import Foundation
 
-//public class SmoothToonFilter: OperationGroup {
-//    public var blurRadiusInPixels: Float = 2.0 { didSet { gaussianBlur.blurRadiusInPixels = blurRadiusInPixels } }
-//    public var threshold: Float = 0.2 { didSet { toonFilter.threshold = threshold } }
-//    public var quantizationLevels: Float = 10.0 { didSet { toonFilter.quantizationLevels = quantizationLevels } }
-//
-//    let gaussianBlur = GaussianBlur()
-//    let toonFilter = ToonFilter()
-//
-//    public override init() {
-//        super.init()
-//
-//        ({blurRadiusInPixels = 2.0})()
-//        ({threshold = 0.2})()
-//        ({quantizationLevels = 10.0})()
-//
-//        self.configureGroup{input, output in
-//            input --> self.gaussianBlur --> self.toonFilter --> output
-//        }
-//    }
-//}
-
 public class Kirakira: OperationGroup {
 
     public enum ColorMode: Int {
@@ -36,85 +15,210 @@ public class Kirakira: OperationGroup {
         case random = 1
     }
 
-//    public var equalMinHue: Float = 0.75 {
-//        didSet { uniformSettings["equalMinHue"] = equalMinHue }
-//    }
-//    public var equalMaxHue: Float = 0.083 {
-//        didSet { uniformSettings["equalMaxHue"] = equalMaxHue }
-//    }
-//    public var equalSaturation: Float = 0.15 {
-//        didSet { uniformSettings["equalSaturation"] = equalSaturation }
-//    }
-//    public var equalBrightness: Float = 2.0 {
-//        didSet { uniformSettings["equalBrightness"] = equalBrightness }
-//    }
-//    public var speed: Float = 7.5 {
-//        didSet { uniformSettings["speed"] = speed }
-//    }
+    public var equalMinHue: Float = 0.75 {
+        didSet { lightExtractorEffect.equalMinHue = equalMinHue }
+    }
+    public var equalMaxHue: Float = 0.083 {
+        didSet { lightExtractorEffect.equalMaxHue = equalMaxHue }
+    }
+    public var equalSaturation: Float = 0.15 {
+        didSet { lightExtractorEffect.equalSaturation = equalSaturation }
+    }
+    public var equalBrightness: Float = 2.0 {
+        didSet { lightExtractorEffect.equalBrightness = equalBrightness }
+    }
+    public var speed: Float = 7.5 {
+        didSet { noiseEffect.speed = speed }
+    }
 //    public var rayCount: Int = 2 {
-//        didSet { uniformSettings["rayCount"] = Float(rayCount) }
+
 //    }
-//    public var rayLength: Float = 0.08 {
-//        didSet { uniformSettings["rayLength"] = rayLength }
-//    }
-//    public var sparkleExposure: Float = 0.0 {
-//        didSet { uniformSettings["sparkleExposure"] = sparkleExposure }
-//    }
-//    public var blur: Float = 0 {
-//        didSet { uniformSettings["blur"] = blur }
-//    }
+    // public var rayLength: Float = 0.08 {
+    //     didSet { directionalBlurEffect.length = rayLength }
+    // }
+    public var sparkleExposure: Float = 0.0 {
+        didSet {
+            firstExposureEffect.exposure = sparkleExposure
+            secondExposureEffect.exposure = 2.0 + sparkleExposure
+        }
+    }
+    public var blur: Float = 0 {
+        didSet { thirdBoxBlurEffect.kernelSize = blur * 2 }
+    }
 //    public var colorMode: ColorMode = .random {
-//        didSet { uniformSettings["colorMode"] = Float(colorMode.rawValue) }
+//        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
 //    }
 //    public var saturation: Float = 0.3 {
-//        didSet { uniformSettings["saturation"] = saturation }
+//        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
 //    }
-//    public var minHue: Float = 0.0 {
-//        didSet { uniformSettings["minHue"] = minHue }
-//    }
-//    public var maxHue: Float = 1.0 {
-//        didSet { uniformSettings["maxHue"] = maxHue }
-//    }
-//    public var noiseInfluence: Float = 1.0 {
-//        didSet { uniformSettings["noiseInfluence"] = noiseInfluence }
-//    }
-//    public var increasingRate: Float = 0.3 {
-//        didSet { uniformSettings["increasingRate"] = increasingRate }
-//    }
-//    public var startAngle: Int = 45 {
-//        didSet { uniformSettings["startAngle"] = Float(startAngle) }
-//    }
-//    public var sparkleScale: Float = 0.7 {
-//        didSet { uniformSettings["sparkleScale"] = sparkleScale }
-//    }
-//    public var sparkleAmount: Float = 0.4 {
-//        didSet { uniformSettings["sparkleAmount"] = sparkleAmount }
-//    }
-//    public var frameRate: Int = 60 {
-//        didSet { uniformSettings["frameRate"] = Float(frameRate) }
-//    }
+    public var minHue: Float = 0.0 {
+        didSet { lightExtractorEffect.minHue = minHue }
+    }
+    public var maxHue: Float = 1.0 {
+        didSet { lightExtractorEffect.maxHue = maxHue }
+    }
+    public var noiseInfluence: Float = 1.0 {
+        didSet { lightExtractorEffect.noiseInfluence = noiseInfluence }
+    }
+    public var increasingRate: Float = 0.3 {
+        didSet { lightExtractorEffect.increasingRate = increasingRate }
+    }
+    // public var startAngle: Int = 45 {
+    //     didSet { directionalBlurEffect.degree = Float(startAngle)
+    // }
+    public var sparkleScale: Float = 0.7 {
+        didSet { noiseEffect.scale = sparkleScale }
+    }
+    public var sparkleAmount: Float = 0.4 {
+        didSet { lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5}
+    }
+    public var frameRate: Float = 60 {
+        didSet { noiseEffect.frameRate = Float(frameRate) }
+    }
 
-//    public init() {
-        // TODO
-//        super.init(fragmentFunctionName:"grainEffectFragment", numberOfInputs:1)
-//        ({equalMinHue = 0.75})()
-//        ({equalMaxHue = 0.083})()
-//        ({equalSaturation = 0.15})()
-//        ({equalBrightness = 2.0})()
-//        ({speed = 7.5})()
+    private let firstBoxBlurEffect = CBBoxBlur()
+    private let secondBoxBlurEffect = CBBoxBlur()
+    private let thirdBoxBlurEffect = CBBoxBlur()
+
+    private let hsvValueEffect = CBHSV()
+    private let dilationEffect = CBDilation()
+
+    private let firstExposureEffect = ExposureAdjustment()
+    private let secondExposureEffect = ExposureAdjustment()
+    private let erosionEffect = CBErosion()
+    private let addBlend = AddBlend()
+    private let noiseEffect = CBPerlineNoise()
+    private let lightExtractorEffect = CBKirakiraLightExtractor()
+    private let directionalBlurEffect = CBDirectionBlur()
+    private let saturationEffect = SaturationBlend()
+    private let perlinNoiseEffect = CBPerlineNoise()
+
+    public override init() {
+        super.init()
+        ({equalMinHue = 0.75})()
+        ({equalMaxHue = 0.083})()
+        ({equalSaturation = 0.15})()
+        ({equalBrightness = 2.0})()
+        ({speed = 7.5})()
 //        ({rayCount = 2})()
 //        ({rayLength = 0.08})()
-//        ({sparkleExposure = 0.0})()
-//        ({blur = 0})()
+        ({sparkleExposure = 0.0})()
+        ({blur = 0})()
 //        ({colorMode = .random})()
 //        ({saturation = 0.3})()
-//        ({minHue = 0.0})()
-//        ({maxHue = 1.0})()
-//        ({noiseInfluence = 1.0})()
-//        ({increasingRate = 0.3})()
+        ({minHue = 0.0})()
+        ({maxHue = 1.0})()
+        ({noiseInfluence = 1.0})()
+        ({increasingRate = 0.3})()
 //        ({startAngle = 45})()
-//        ({sparkleScale = 0.7})()
-//        ({sparkleAmount = 0.4})()
-//        ({frameRate = 60})()
-//    }
+        ({sparkleScale = 0.7})()
+        ({sparkleAmount = 0.4})()
+        ({frameRate = 60})()
+
+        noiseEffect.speed = speed
+        noiseEffect.scale = sparkleScale
+        noiseEffect.frameRate = frameRate
+
+        lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5
+        lightExtractorEffect.noiseInfluence = noiseInfluence
+        lightExtractorEffect.increasingRate = increasingRate
+        lightExtractorEffect.minHue = minHue
+        lightExtractorEffect.maxHue = maxHue
+        lightExtractorEffect.equalMinHue = equalMinHue
+        lightExtractorEffect.equalMaxHue = equalMaxHue
+        lightExtractorEffect.equalSaturation = equalSaturation
+        lightExtractorEffect.equalBrightness = equalBrightness
+        // lightExtractorEffect.updateValue(.textures([noiseTexture]), for: .noiseTexture)
+        // let lightMapTexture = lightExtractorEffect.applyEffect(on: mtlTexture, in: commandBuffer, at: time)
+
+        firstBoxBlurEffect.texelSizeX = 3
+        firstBoxBlurEffect.texelSizeY = 3
+        firstBoxBlurEffect.kernelSize = 5 * 2
+//        var boxBlurredTexture = boxBlurEffect.applyEffect(on: lightMapTexture, in: commandBuffer, at: time)
+
+        hsvValueEffect.value = 0.7
+        // boxBlurredTexture = hsvValueEffect.applyEffect(on: boxBlurredTexture, in: commandBuffer, at: time)
+
+        dilationEffect.steps = 8
+        dilationEffect.texelStep = 3
+        dilationEffect.mode = 1
+//        var centerTexture = dilationEffect.applyEffect(on: boxBlurredTexture, in: commandBuffer, at: time)
+        firstExposureEffect.exposure = sparkleExposure
+        // centerTexture = exposureEffect.applyEffect(on: centerTexture, in: commandBuffer, at: time)
+
+        secondBoxBlurEffect.texelSizeX = 2
+        secondBoxBlurEffect.texelSizeY = 2
+        secondBoxBlurEffect.kernelSize = 5 * 2
+//        centerTexture = boxBlurEffect.applyEffect(on: centerTexture, in: commandBuffer, at: time)
+
+//        var sparkleTexture = centerTexture
+//        // Calculate the degree interval
+//        let intervalDegree = 180.0 / Float(rayCount)
+        erosionEffect.steps = 6
+        erosionEffect.texelStep = 3
+//        let erodedLightTexture = erosionEffect.applyEffect(on: lightMapTexture, in: commandBuffer, at: time)
+
+        /*
+         for i in 0..<rayCount {
+             updateDirectionalBlurParameters(degree: Float(startAngle) + Float(i) * intervalDegree, length: rayLength)
+             var rayTexture = directionalBlurEffect.applyEffect(on: erodedLightTexture, in: commandBuffer, at: time)
+             exposureEffect.updateValue(.float(2.0 + sparkleExposure), for: .exposure)
+             rayTexture = exposureEffect.applyEffect(on: rayTexture, in: commandBuffer, at: time)
+             updateDirectionalBlurParameters(degree: Float(startAngle) + Float(i) * intervalDegree, length: rayLength * 0.4)
+             rayTexture = directionalBlurEffect.applyEffect(on: rayTexture, in: commandBuffer, at: time)
+             addBlendEffect.updateValue(.textures([rayTexture]), for: .assetTexture)
+             sparkleTexture = addBlendEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
+         }
+         */
+        // directionalBlurEffect.length = rayLength
+        // directionalBlurEffect.degree = Float(startAngle)
+//        directionalBlurEffect.steps = 6
+//        directionalBlurEffect.texelStep = 3
+//        directionalBlurEffect.mode = 1
+        secondExposureEffect.exposure = 2.0 + sparkleExposure
+
+        thirdBoxBlurEffect.texelSizeX = 2
+        thirdBoxBlurEffect.texelSizeY = 2
+        thirdBoxBlurEffect.kernelSize = blur * 2
+        // sparkleTexture = boxBlurEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
+
+//        saturationEffect.saturation = saturation * Float(colorMode.rawValue)
+        // sparkleTexture = saturationEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
+
+        // addBlendEffect.updateValue(.textures([sparkleTexture]), for: .assetTexture)
+        // let outputTexture = addBlendEffect.applyEffect(on: mtlTexture, in: commandBuffer, at: time)
+
+        self.configureGroup{input, output in
+            input 
+            // noise texture
+            --> perlinNoiseEffect
+            // lightExtractor texture
+            --> lightExtractorEffect
+
+            lightExtractorEffect
+            --> firstBoxBlurEffect
+            --> hsvValueEffect
+            // box blue texture
+            --> dilationEffect
+            --> firstExposureEffect
+            --> secondBoxBlurEffect
+            --> addBlend
+
+            self.lightExtractorEffect
+            --> self.erosionEffect
+            --> self.directionalBlurEffect
+            --> self.secondExposureEffect
+            --> self.directionalBlurEffect
+            // ray texture
+            --> self.addBlend
+
+            self.addBlend
+            // sparkle texture
+            --> thirdBoxBlurEffect
+            --> saturationEffect
+            // sparkle texture
+            --> addBlend
+            --> output
+        }
+    }
 }
