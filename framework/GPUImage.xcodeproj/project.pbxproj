@@ -314,6 +314,10 @@
 		7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB272103CEB900A91156 /* AddBlend.swift */; };
 		7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
 		7B72DB2C2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
+		93C331A22BD7AA9F00196F25 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C331A02BD7AA9E00196F25 /* Utils.h */; };
+		93C331A32BD7AA9F00196F25 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C331A02BD7AA9E00196F25 /* Utils.h */; };
+		93C331A42BD7AA9F00196F25 /* Utils.metal in Sources */ = {isa = PBXBuildFile; fileRef = 93C331A12BD7AA9F00196F25 /* Utils.metal */; };
+		93C331A52BD7AA9F00196F25 /* Utils.metal in Sources */ = {isa = PBXBuildFile; fileRef = 93C331A12BD7AA9F00196F25 /* Utils.metal */; };
 		96F24FEF22007D6D0042E78D /* MedianFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96F24FED22007D6C0042E78D /* MedianFilter.metal */; };
 		96F24FF022007D6D0042E78D /* MedianFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96F24FED22007D6C0042E78D /* MedianFilter.metal */; };
 		96F24FF122007D6D0042E78D /* MedianFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F24FEE22007D6C0042E78D /* MedianFilter.swift */; };
@@ -602,6 +606,8 @@
 		7B25C0EB2103D5E9000EC621 /* ColorBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = ColorBlend.metal; path = Source/Operations/ColorBlend.metal; sourceTree = "<group>"; };
 		7B72DB272103CEB900A91156 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBlend.swift; path = Source/Operations/AddBlend.swift; sourceTree = "<group>"; };
 		7B72DB2A2103CED000A91156 /* AddBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = AddBlend.metal; path = Source/Operations/AddBlend.metal; sourceTree = "<group>"; };
+		93C331A02BD7AA9E00196F25 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Source/Operations/Utils.h; sourceTree = "<group>"; };
+		93C331A12BD7AA9F00196F25 /* Utils.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Utils.metal; path = Source/Operations/Utils.metal; sourceTree = "<group>"; };
 		96F24FED22007D6C0042E78D /* MedianFilter.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = MedianFilter.metal; path = Source/Operations/MedianFilter.metal; sourceTree = "<group>"; };
 		96F24FEE22007D6C0042E78D /* MedianFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedianFilter.swift; path = Source/Operations/MedianFilter.swift; sourceTree = "<group>"; };
 		BC101EB32245650F0020D74D /* ColorSwizzle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = ColorSwizzle.metal; path = Source/Operations/ColorSwizzle.metal; sourceTree = "<group>"; };
@@ -913,6 +919,8 @@
 				BCC6AB64210E5FF600F9803A /* TexelSamplingTypes.h */,
 				BCC6AB61210E5ECE00F9803A /* NearbyTexelSampling.metal */,
 				BC7FC40B212B2B3800B37FB6 /* OperationGroup.swift */,
+				93C331A02BD7AA9E00196F25 /* Utils.h */,
+				93C331A12BD7AA9F00196F25 /* Utils.metal */,
 				FBC104EB2BB6A33800FA0885 /* CB */,
 				BC7BA27520F2C20D006B5F4B /* Color processing */,
 				BCFCD46320FCE77100560BC9 /* Blends */,
@@ -1009,6 +1017,7 @@
 			files = (
 				BCC6AB65210E5FF600F9803A /* TexelSamplingTypes.h in Headers */,
 				BC7BA27B20F2C5E8006B5F4B /* OperationShaderTypes.h in Headers */,
+				93C331A22BD7AA9F00196F25 /* Utils.h in Headers */,
 				79CB6E45210A55CB0042F87B /* BlendShaderTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,6 +1028,7 @@
 			files = (
 				BCC6AB66210E5FF600F9803A /* TexelSamplingTypes.h in Headers */,
 				BC7BA27C20F2C5E8006B5F4B /* OperationShaderTypes.h in Headers */,
+				93C331A32BD7AA9F00196F25 /* Utils.h in Headers */,
 				79CB6E46210A55CB0042F87B /* BlendShaderTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1087,6 +1097,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = BCE0BE7220D6DE610006E120;
 			productRefGroup = BCE0BE7D20D6DE610006E120 /* Products */;
@@ -1230,6 +1241,7 @@
 				FBFD6C652BD690A00068909D /* CBLinearDogeBlend.metal in Sources */,
 				79EB1B7A2125CC360049135E /* MissEtikateFilter.swift in Sources */,
 				795ECAC621EF97F8000EF927 /* ColorLocalBinaryPattern.swift in Sources */,
+				93C331A42BD7AA9F00196F25 /* Utils.metal in Sources */,
 				79CB6E17210931CD0042F87B /* NormalBlend.metal in Sources */,
 				79EB1B862125D7550049135E /* ChromaKeyBlend.swift in Sources */,
 				BC25F8A122C15E2600CBBD15 /* SoftElegance.swift in Sources */,
@@ -1436,6 +1448,7 @@
 				79A81CA121010A2200A3B43A /* Vibrance.swift in Sources */,
 				4C280F77213426D6001A985C /* Posterize.swift in Sources */,
 				79CB6E122109311C0042F87B /* MultiplyBlend.metal in Sources */,
+				93C331A52BD7AA9F00196F25 /* Utils.metal in Sources */,
 				FB10DA702AF8F688000B1AEF /* Grain.metal in Sources */,
 				BCE0BE9F20D6E3C80006E120 /* Color.swift in Sources */,
 				FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */,
