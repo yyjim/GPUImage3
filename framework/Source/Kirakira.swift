@@ -45,12 +45,12 @@ public class Kirakira: OperationGroup {
     public var blur: Float = 0 {
         didSet { thirdBoxBlurEffect.kernelSize = blur * 2 }
     }
-//    public var colorMode: ColorMode = .random {
-//        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
-//    }
-//    public var saturation: Float = 0.3 {
-//        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
-//    }
+    public var colorMode: ColorMode = .random {
+        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+    }
+    public var saturation: Float = 0.3 {
+        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+    }
     public var minHue: Float = 0.0 {
         didSet { lightExtractorEffect.minHue = minHue }
     }
@@ -85,12 +85,13 @@ public class Kirakira: OperationGroup {
 
     private let firstExposureEffect = ExposureAdjustment()
     private let secondExposureEffect = ExposureAdjustment()
+
     private let erosionEffect = CBErosion()
     private let addBlend = AddBlend()
     private let noiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
     private let directionalBlurEffect = CBDirectionBlur()
-    private let saturationEffect = SaturationBlend()
+    private let saturationEffect = SaturationAdjustment()
     private let perlinNoiseEffect = CBPerlineNoise()
 
     public override init() {
@@ -104,8 +105,8 @@ public class Kirakira: OperationGroup {
 //        ({rayLength = 0.08})()
         ({sparkleExposure = 0.0})()
         ({blur = 0})()
-//        ({colorMode = .random})()
-//        ({saturation = 0.3})()
+        ({colorMode = .random})()
+        ({saturation = 0.3})()
         ({minHue = 0.0})()
         ({maxHue = 1.0})()
         ({noiseInfluence = 1.0})()
