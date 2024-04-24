@@ -159,11 +159,9 @@ public class Kirakira: OperationGroup {
 
         self.configureGroup{
             input, output in
-//            input --> output
             
-//            input
-//            --> perlinNoiseEffect
-//            --> output
+            input
+            --> perlinNoiseEffect
 
             input
             --> lightExtractorEffect
@@ -178,17 +176,6 @@ public class Kirakira: OperationGroup {
             
             lightExtractorEffect
             --> directionalShines
-            
-            print(
-                "🌲",
-                lightExtractorEffect.maximumInputs,
-                firstAddBlend.maximumInputs,
-                secondAddBlend.maximumInputs,
-                "\n",
-                lightExtractorEffect.sources.sources.count,
-                firstAddBlend.sources.sources.count,
-                secondAddBlend.sources.sources.count
-            )
 
             perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
             directionalShines.addTarget(firstAddBlend, atTargetIndex: 1)

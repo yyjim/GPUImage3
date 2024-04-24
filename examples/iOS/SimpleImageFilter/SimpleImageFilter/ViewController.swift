@@ -26,13 +26,14 @@ class ViewController: UIViewController {
 //        grainFilter.strength = 9.0 / 100.0
 //        grainFilter.time = 1.1
 
-        let filter = CBPerlineNoise()//Kirakira()
+        let filter = Kirakira()
 
 //        let filter = CBKirakiraLightExtractor()
 //        let input2 = PictureInput(image: UIImage(named:"overlay-1.jpg")!)
 //        input2.addTarget(filter, atTargetIndex: 1)
 //        input2.processImage()
 
+//        picture = PictureInput(image: UIImage(named:"overlay-3.png")!)
         picture = PictureInput(image: UIImage(named:"WID-small.jpg")!)
 
 //        picture --> filter --> blendImage
