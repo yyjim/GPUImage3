@@ -15,17 +15,17 @@ final class DirectionalShines: OperationGroup {
     var rayLength: Float = 0.08 {
         didSet { updateDirectionalShines() }
     }
-    var degree: Float = 45.0 {
+    var startAngle: Int = 45 {
         didSet { updateDirectionalShines() }
     }
     var sparkleExposure: Float = 0.0 {
         didSet { updateDirectionalShines() }
     }
-    private var directionalShines: [DirectionalShine]
+    private var directionalShines: [DirectionalShine] = []
 
     override init() {
         super.init()
-        setupPipeline()
+//        resetDirectionalShines()
     }
 }
 
@@ -55,12 +55,12 @@ extension DirectionalShines {
 
     private func setupPipeline() {
         configureGroup { input, output in
-            input
-            --> firstDirectionalBlurEffect
-            --> exposureEffect
-            --> secondDirectionalBlurEffect
-            --> addBlendEffect
-            --> output
+            var input: ImageProcessingOperation = input
+            for directionalShine in directionalShines {
+                input --> directionalShine
+                input = directionalShine
+            }
+            input --> output
         }
     }
 }

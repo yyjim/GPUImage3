@@ -314,6 +314,8 @@
 		7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB272103CEB900A91156 /* AddBlend.swift */; };
 		7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
 		7B72DB2C2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
+		93290EDC2BD902F900028F31 /* DirectionalShine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93290EDA2BD902F900028F31 /* DirectionalShine.swift */; };
+		93290EDD2BD902F900028F31 /* DirectionalShines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93290EDB2BD902F900028F31 /* DirectionalShines.swift */; };
 		93C331A22BD7AA9F00196F25 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C331A02BD7AA9E00196F25 /* Utils.h */; };
 		93C331A32BD7AA9F00196F25 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C331A02BD7AA9E00196F25 /* Utils.h */; };
 		93C331A42BD7AA9F00196F25 /* Utils.metal in Sources */ = {isa = PBXBuildFile; fileRef = 93C331A12BD7AA9F00196F25 /* Utils.metal */; };
@@ -418,7 +420,6 @@
 		FB10DA712AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FB10DA722AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FBC104C52BB64C4D00FA0885 /* Kirakira.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104C42BB64C4D00FA0885 /* Kirakira.swift */; };
-		FBC104C62BB64C4D00FA0885 /* Kirakira.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104C42BB64C4D00FA0885 /* Kirakira.swift */; };
 		FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */; };
 		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC104FD2BB6A36000FA0885 /* CBKirakiraLightExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */; };
@@ -606,6 +607,8 @@
 		7B25C0EB2103D5E9000EC621 /* ColorBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = ColorBlend.metal; path = Source/Operations/ColorBlend.metal; sourceTree = "<group>"; };
 		7B72DB272103CEB900A91156 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBlend.swift; path = Source/Operations/AddBlend.swift; sourceTree = "<group>"; };
 		7B72DB2A2103CED000A91156 /* AddBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = AddBlend.metal; path = Source/Operations/AddBlend.metal; sourceTree = "<group>"; };
+		93290EDA2BD902F900028F31 /* DirectionalShine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectionalShine.swift; path = Source/DirectionalShine.swift; sourceTree = "<group>"; };
+		93290EDB2BD902F900028F31 /* DirectionalShines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectionalShines.swift; path = Source/DirectionalShines.swift; sourceTree = "<group>"; };
 		93C331A02BD7AA9E00196F25 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Source/Operations/Utils.h; sourceTree = "<group>"; };
 		93C331A12BD7AA9F00196F25 /* Utils.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Utils.metal; path = Source/Operations/Utils.metal; sourceTree = "<group>"; };
 		96F24FED22007D6C0042E78D /* MedianFilter.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = MedianFilter.metal; path = Source/Operations/MedianFilter.metal; sourceTree = "<group>"; };
@@ -750,7 +753,6 @@
 				795ECA7C21E9095A000EF927 /* ZoomBlur.metal */,
 				FB10DA6E2AF8F688000B1AEF /* Grain.swift */,
 				FB10DA6D2AF8F688000B1AEF /* Grain.metal */,
-				FBC104C42BB64C4D00FA0885 /* Kirakira.swift */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -988,6 +990,7 @@
 		FBC104EB2BB6A33800FA0885 /* CB */ = {
 			isa = PBXGroup;
 			children = (
+				FBC104C42BB64C4D00FA0885 /* Kirakira.swift */,
 				FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */,
 				FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */,
 				FBC104F52BB6A35F00FA0885 /* CBDilation.metal */,
@@ -1004,6 +1007,8 @@
 				FBC104F82BB6A35F00FA0885 /* CBLinearDogeBlend.swift */,
 				FBFD6C662BD690E70068909D /* CBPerlineNoise.metal */,
 				FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */,
+				93290EDA2BD902F900028F31 /* DirectionalShine.swift */,
+				93290EDB2BD902F900028F31 /* DirectionalShines.swift */,
 			);
 			name = CB;
 			sourceTree = "<group>";
@@ -1178,6 +1183,7 @@
 				7954BF552214C0EA008402A6 /* GlassSphere.metal in Sources */,
 				79CB6E0521092D7C0042F87B /* LinearBurnBlend.metal in Sources */,
 				BCC6AB62210E5ECE00F9803A /* NearbyTexelSampling.metal in Sources */,
+				93290EDC2BD902F900028F31 /* DirectionalShine.swift in Sources */,
 				BC9294A62105134E006C8E93 /* ColorMatrixFilter.swift in Sources */,
 				BCC6AB6C210E635B00F9803A /* Convolution3x3.metal in Sources */,
 				BCE0BE9E20D6E3C80006E120 /* Color.swift in Sources */,
@@ -1331,6 +1337,7 @@
 				79CB6E32210A0D8D0042F87B /* SoftLightBlend.metal in Sources */,
 				7957437B20FE2A6C001EAE0A /* LuminanceThreshold.swift in Sources */,
 				7999997A2226EA4A007404F2 /* EmbossFilter.swift in Sources */,
+				93290EDD2BD902F900028F31 /* DirectionalShines.swift in Sources */,
 				7957438120FE2D97001EAE0A /* FalseColor.swift in Sources */,
 				796B98A1238333200013FBD0 /* Sharpen.metal in Sources */,
 				795ECAA221ED253B000EF927 /* ThresholdSobelEdgeDetection.swift in Sources */,
@@ -1455,7 +1462,6 @@
 				79CB6E21210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B752125CBD50049135E /* AmatorkaFilter.swift in Sources */,
 				793D932A20F66C5C008A7A6E /* ColorInversion.swift in Sources */,
-				FBC104C62BB64C4D00FA0885 /* Kirakira.swift in Sources */,
 				7957438820FE3CF1001EAE0A /* HighlightsAndShadows.swift in Sources */,
 				79CB6E1B210933A60042F87B /* OverlayBlend.swift in Sources */,
 				795ECA9A21ED177D000EF927 /* PolarPixellate.metal in Sources */,
