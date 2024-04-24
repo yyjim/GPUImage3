@@ -155,7 +155,7 @@ public class Kirakira: OperationGroup {
 //        // Calculate the degree interval
 //        let intervalDegree = 180.0 / Float(rayCount)
         erosionEffect.steps = 6
-        erosionEffect.texelStep = 3
+        erosionEffect.texelSize = 3
 //        let erodedLightTexture = erosionEffect.applyEffect(on: lightMapTexture, in: commandBuffer, at: time)
 
         /*
