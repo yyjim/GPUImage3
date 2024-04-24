@@ -17,6 +17,19 @@ public protocol ImageConsumer:AnyObject {
 public protocol ImageProcessingOperation: ImageConsumer, ImageSource {
 }
 
+public extension ImageProcessingOperation {
+
+    public func resetPipeline() {
+        // Remove sources
+        for index in 0..<maximumInputs {
+            removeSourceAtIndex(index)
+        }
+        // Remove targets
+        removeAllTargets()
+    }
+
+}
+
 infix operator --> : AdditionPrecedence
 //precedencegroup ProcessingOperationPrecedence {
 //    associativity: left

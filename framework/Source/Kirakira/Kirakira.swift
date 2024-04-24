@@ -30,17 +30,17 @@ public class Kirakira: OperationGroup {
     public var speed: Float = 7.5 {
         didSet { noiseEffect.speed = speed }
     }
-//    public var rayCount: Int = 2 {
-
-//    }
-    // public var rayLength: Float = 0.08 {
-    //     didSet { directionalBlurEffect.length = rayLength }
-    // }
+    public var rayCount: Int = 2 {
+        didSet { directionalShines.rayCount = rayCount }
+    }
+     public var rayLength: Float = 0.08 {
+         didSet { directionalShines.rayLength = rayLength }
+     }
+    public var startAngle: Int = 45 {
+        didSet { directionalShines.startAngle = startAngle }
+    }
     public var sparkleExposure: Float = 0.0 {
-        didSet {
-            firstExposureEffect.exposure = sparkleExposure
-            secondExposureEffect.exposure = 2.0 + sparkleExposure
-        }
+        didSet { directionalShines.sparkleExposure = sparkleExposure }
     }
     public var blur: Float = 0 {
         didSet { thirdBoxBlurEffect.kernelSize = blur * 2 }
@@ -63,9 +63,6 @@ public class Kirakira: OperationGroup {
     public var increasingRate: Float = 0.3 {
         didSet { lightExtractorEffect.increasingRate = increasingRate }
     }
-    // public var startAngle: Int = 45 {
-    //     didSet { directionalBlurEffect.degree = Float(startAngle)
-    // }
     public var sparkleScale: Float = 0.7 {
         didSet { noiseEffect.scale = sparkleScale }
     }
@@ -87,12 +84,15 @@ public class Kirakira: OperationGroup {
     private let secondExposureEffect = ExposureAdjustment()
 
     private let erosionEffect = CBErosion()
-    private let addBlend = AddBlend()
+    private let firstAddBlend = AddBlend()
     private let noiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
-    private let directionalBlurEffect = CBDirectionBlur()
+    private let directionalShines = DirectionalShines()
     private let saturationEffect = SaturationAdjustment()
     private let perlinNoiseEffect = CBPerlineNoise()
+    private let secondAddBlend = AddBlend()
+
+    private let directionalShines: [DirectionalShines] = []
 
     public override init() {
         super.init()
@@ -101,8 +101,8 @@ public class Kirakira: OperationGroup {
         ({equalSaturation = 0.15})()
         ({equalBrightness = 2.0})()
         ({speed = 7.5})()
-//        ({rayCount = 2})()
-//        ({rayLength = 0.08})()
+        ({rayCount = 2})()
+        ({rayLength = 0.08})()
         ({sparkleExposure = 0.0})()
         ({blur = 0})()
         ({colorMode = .random})()
@@ -111,7 +111,7 @@ public class Kirakira: OperationGroup {
         ({maxHue = 1.0})()
         ({noiseInfluence = 1.0})()
         ({increasingRate = 0.3})()
-//        ({startAngle = 45})()
+        ({startAngle = 45})()
         ({sparkleScale = 0.7})()
         ({sparkleAmount = 0.4})()
         ({frameRate = 60})()
@@ -132,6 +132,7 @@ public class Kirakira: OperationGroup {
         // lightExtractorEffect.updateValue(.textures([noiseTexture]), for: .noiseTexture)
         // let lightMapTexture = lightExtractorEffect.applyEffect(on: mtlTexture, in: commandBuffer, at: time)
 
+        firstBoxBlurEffect
         firstBoxBlurEffect.texelSizeX = 3
         firstBoxBlurEffect.texelSizeY = 3
         firstBoxBlurEffect.kernelSize = 5 * 2
@@ -161,6 +162,7 @@ public class Kirakira: OperationGroup {
 
         /*
          for i in 0..<rayCount {
+         let directionalBlurEffect()
              updateDirectionalBlurParameters(degree: Float(startAngle) + Float(i) * intervalDegree, length: rayLength)
              var rayTexture = directionalBlurEffect.applyEffect(on: erodedLightTexture, in: commandBuffer, at: time)
              exposureEffect.updateValue(.float(2.0 + sparkleExposure), for: .exposure)
@@ -171,54 +173,33 @@ public class Kirakira: OperationGroup {
              sparkleTexture = addBlendEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
          }
          */
-        // directionalBlurEffect.length = rayLength
-        // directionalBlurEffect.degree = Float(startAngle)
-//        directionalBlurEffect.steps = 6
-//        directionalBlurEffect.texelStep = 3
-//        directionalBlurEffect.mode = 1
         secondExposureEffect.exposure = 2.0 + sparkleExposure
 
         thirdBoxBlurEffect.texelSizeX = 2
         thirdBoxBlurEffect.texelSizeY = 2
         thirdBoxBlurEffect.kernelSize = blur * 2
-        // sparkleTexture = boxBlurEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
-
-//        saturationEffect.saturation = saturation * Float(colorMode.rawValue)
-        // sparkleTexture = saturationEffect.applyEffect(on: sparkleTexture, in: commandBuffer, at: time)
-
-        // addBlendEffect.updateValue(.textures([sparkleTexture]), for: .assetTexture)
-        // let outputTexture = addBlendEffect.applyEffect(on: mtlTexture, in: commandBuffer, at: time)
 
         self.configureGroup{input, output in
-            input 
-            // noise texture
-            --> perlinNoiseEffect
-            // lightExtractor texture
-            --> lightExtractorEffect
+            lightExtractorEffect.addTarget(perlinNoiseEffect, atTargetIndex: 1)
+            firstAddBlend.addTarget(directionalShines, atTargetIndex: 1)
+            secondAddBlend.addTarget(saturationEffect, atTargetIndex: 1)
 
-            lightExtractorEffect
+            input
+            --> perlinNoiseEffect
+
+            input
+            --> lightExtractorEffect
             --> firstBoxBlurEffect
             --> hsvValueEffect
-            // box blue texture
             --> dilationEffect
             --> firstExposureEffect
             --> secondBoxBlurEffect
-            --> addBlend
-
-            self.lightExtractorEffect
-            --> self.erosionEffect
-            --> self.directionalBlurEffect
-            --> self.secondExposureEffect
-            --> self.directionalBlurEffect
-            // ray texture
-            --> self.addBlend
-
-            self.addBlend
-            // sparkle texture
+            --> firstAddBlend
             --> thirdBoxBlurEffect
             --> saturationEffect
-            // sparkle texture
-            --> addBlend
+
+            input
+            --> secondAddBlend
             --> output
         }
     }
