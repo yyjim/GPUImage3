@@ -25,7 +25,7 @@ final class DirectionalShines: OperationGroup {
 
     override init() {
         super.init()
-//        resetDirectionalShines()
+        resetDirectionalShines()
     }
 }
 
@@ -54,6 +54,8 @@ extension DirectionalShines {
     }
 
     private func setupPipeline() {
+        resetPipeline()
+        removeAllTargets()
         configureGroup { input, output in
             var input: ImageProcessingOperation = input
             for directionalShine in directionalShines {

@@ -30,7 +30,6 @@ final class DirectionalShine: OperationGroup {
     private let exposureEffect = ExposureAdjustment()
     private let firstDirectionalBlurEffect = CBDirectionBlur()
     private let secondDirectionalBlurEffect = CBDirectionBlur()
-    private let addBlendEffect = AddBlend()
 
     override init() {
         super.init()
@@ -40,7 +39,6 @@ final class DirectionalShine: OperationGroup {
             --> firstDirectionalBlurEffect
             --> exposureEffect
             --> secondDirectionalBlurEffect
-            --> addBlendEffect
             --> output
         }
     }
