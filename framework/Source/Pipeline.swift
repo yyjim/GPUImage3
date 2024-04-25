@@ -19,7 +19,7 @@ public protocol ImageProcessingOperation: ImageConsumer, ImageSource {
 
 public extension ImageProcessingOperation {
 
-    public func resetPipeline() {
+    func resetPipeline() {
         // Remove sources
         for index in 0..<maximumInputs {
             removeSourceAtIndex(index)
