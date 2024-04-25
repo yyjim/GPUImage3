@@ -111,12 +111,12 @@ public class Kirakira: OperationGroup {
             --> sparklesEffect
             --> boxBlurEffect
             --> saturationEffect
-
-            input
-            --> addBlend
+//
+//            input
+//            --> addBlend
             --> output
 
-            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
+//            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
         }
     }
 }

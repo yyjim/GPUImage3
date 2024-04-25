@@ -56,19 +56,16 @@ public class Sparkles: OperationGroup {
     }
     //
     public var rayCount: Int = 2 {
-        didSet { directionalShines.rayCount = rayCount }
+        didSet { resetSubEffects() }
     }
-     public var rayLength: Float = 0.08 {
-         didSet { directionalShines.rayLength = rayLength }
-     }
+    public var rayLength: Float = 0.08 {
+        didSet { updateDirectionalShines() }
+    }
     public var startAngle: Int = 45 {
-        didSet { directionalShines.startAngle = startAngle }
+        didSet { updateDirectionalShines() }
     }
     public var sparkleExposure: Float = 0.0 {
-        didSet {
-            exposureEffect.exposure = sparkleExposure
-            directionalShines.sparkleExposure = 2.0 + sparkleExposure
-        }
+        didSet { updateDirectionalShines() }
     }
 
     // MARK: - Effects
@@ -76,7 +73,8 @@ public class Sparkles: OperationGroup {
     private let perlinNoiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
 
-    private let directionalShines = DirectionalShines()
+    private var directionalShines: [DirectionalShine] = []
+    private var addBlendEffects: [AddBlend] = []
 
     private let firstBoxBlurEffect = CBBoxBlur()
     private let hsvValueEffect = CBHSV()
@@ -135,47 +133,76 @@ public class Sparkles: OperationGroup {
         secondBoxBlurEffect.texelSizeY = 2
         secondBoxBlurEffect.kernelSize = 5 * 2
 
-        directionalShines.rayCount = rayCount
-        directionalShines.rayLength = rayLength
-        directionalShines.startAngle = startAngle
-        directionalShines.sparkleExposure = 2.0 + sparkleExposure
+        resetSubEffects()
+    }
+}
 
+// MARK: - Private functions
+extension Sparkles {
 
-        self.configureGroup{
+    private func updateDirectionalShines() {
+        let intervalDegree = 180.0 / Float(rayCount)
+        directionalShines
+            .enumerated()
+            .forEach { index, directionalShine in
+                directionalShine.degree = Float(startAngle) + (Float(index) * intervalDegree)
+                directionalShine.rayLength = rayLength
+                directionalShine.sparkleExposure = sparkleExposure
+            }
+    }
+
+    private func resetSubEffects() {
+        directionalShines.forEach {
+            $0.removeAllTargets()
+            $0.resetPipeline()
+        }
+        directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
+
+        addBlendEffects.forEach {
+            $0.removeAllTargets()
+            $0.resetPipeline()
+        }
+        addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
+
+        resetPipeline()
+        removeAllTargets()
+
+        setupPipeline()
+        updateDirectionalShines()
+    }
+
+    private func setupPipeline() {
+        configureGroup{
             input, output in
-
-//            input --> output
 
             input
             --> perlinNoiseEffect
+            perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
 
             input
+            // lightMap
             --> lightExtractorEffect
+            // boxBlurredTexture
             --> firstBoxBlurEffect
             --> hsvValueEffect
             --> dilationEffect
+            // centerTexture/sparkleTexture
             --> exposureEffect
             --> secondBoxBlurEffect
-            --> directionalShines
+
+            // ray
+            var input: ImageProcessingOperation = secondBoxBlurEffect
+
+            for (addBlend, directionalShine) in zip(addBlendEffects, directionalShines) {
+                lightExtractorEffect --> directionalShine
+                directionalShine.addTarget(addBlend, atTargetIndex: 1)
+
+                input --> addBlend
+                input = addBlend
+            }
+
+            input
             --> output
-
-//            --> firstAddBlend
-//            --> thirdBoxBlurEffect
-//            --> saturationEffect
-//            --> output
-
-//            lightExtractorEffect.addTarget(directionalShines, atTargetIndex: 1)
-//            lightExtractorEffect
-//            --> directionalShines
-//            directionalShines
-//            --> output
-
-            perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
-            directionalShines.addTarget(firstAddBlend, atTargetIndex: 1)
-
-//            input
-//            --> secondAddBlend
-//            --> output
         }
     }
 }
