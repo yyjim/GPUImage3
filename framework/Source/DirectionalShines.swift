@@ -10,7 +10,7 @@ import Foundation
 final class DirectionalShines: OperationGroup {
 
     var rayCount: Int = 2 {
-        didSet { resetDirectionalShines() }
+        didSet { resetSubEffects() }
     }
     var rayLength: Float = 0.08 {
         didSet { updateDirectionalShines() }
@@ -22,10 +22,16 @@ final class DirectionalShines: OperationGroup {
         didSet { updateDirectionalShines() }
     }
     private var directionalShines: [DirectionalShine] = []
+    private var erosionEffect = CBErosion()
+    private var addBlendEffects: [AddBlend] = []
 
     override init() {
         super.init()
-        resetDirectionalShines()
+
+        erosionEffect.steps = 6
+        erosionEffect.texelSize = 3
+
+        resetSubEffects()
     }
 }
 
@@ -37,30 +43,46 @@ extension DirectionalShines {
         directionalShines
             .enumerated()
             .forEach { index, directionalShine in
-                directionalShine.degree = Float(startAngle) + Float(index) * intervalDegree
+                directionalShine.degree = Float(startAngle) + (Float(index) * intervalDegree)
                 directionalShine.rayLength = rayLength
                 directionalShine.sparkleExposure = sparkleExposure
             }
     }
 
-    private func resetDirectionalShines() {
+    private func resetSubEffects() {
         directionalShines.forEach {
             $0.removeAllTargets()
             $0.resetPipeline()
         }
         directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
-        updateDirectionalShines()
+        
+        addBlendEffects.forEach {
+            $0.removeAllTargets()
+            $0.resetPipeline()
+        }
+        addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
+
+        resetPipeline()
+        removeAllTargets()
+
         setupPipeline()
+        updateDirectionalShines()
     }
 
     private func setupPipeline() {
-        resetPipeline()
-        removeAllTargets()
         configureGroup { input, output in
+
+            input
+            --> erosionEffect
+
             var input: ImageProcessingOperation = input
-            for directionalShine in directionalShines {
-                input --> directionalShine
-                input = directionalShine
+
+            for (addBlend, directionalShine) in zip(addBlendEffects, directionalShines) {
+                erosionEffect --> directionalShine
+                directionalShine.addTarget(addBlend, atTargetIndex: 1)
+
+                input --> addBlend
+                input = addBlend
             }
             input --> output
         }

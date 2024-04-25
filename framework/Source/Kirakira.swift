@@ -85,7 +85,6 @@ public class Kirakira: OperationGroup {
 
     private let exposureEffect = ExposureAdjustment()
 
-    private let erosionEffect = CBErosion()
     private let firstAddBlend = AddBlend()
     private let noiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
@@ -144,9 +143,6 @@ public class Kirakira: OperationGroup {
         secondBoxBlurEffect.texelSizeX = 2
         secondBoxBlurEffect.texelSizeY = 2
         secondBoxBlurEffect.kernelSize = 5 * 2
-
-        erosionEffect.steps = 6
-        erosionEffect.texelSize = 3
 
         directionalShines.rayCount = rayCount
         directionalShines.rayLength = rayLength
