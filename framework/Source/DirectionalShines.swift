@@ -22,14 +22,10 @@ final class DirectionalShines: OperationGroup {
         didSet { updateDirectionalShines() }
     }
     private var directionalShines: [DirectionalShine] = []
-    private var erosionEffect = CBErosion()
     private var addBlendEffects: [AddBlend] = []
 
     override init() {
         super.init()
-
-        erosionEffect.steps = 6
-        erosionEffect.texelSize = 3
 
         resetSubEffects()
     }
@@ -72,13 +68,10 @@ extension DirectionalShines {
     private func setupPipeline() {
         configureGroup { input, output in
 
-            input
-            --> erosionEffect
-
             var input: ImageProcessingOperation = input
 
             for (addBlend, directionalShine) in zip(addBlendEffects, directionalShines) {
-                erosionEffect --> directionalShine
+                input --> directionalShine
                 directionalShine.addTarget(addBlend, atTargetIndex: 1)
 
                 input --> addBlend
