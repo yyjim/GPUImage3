@@ -16,37 +16,34 @@ public class Kirakira: OperationGroup {
     }
 
     public var equalMinHue: Float = 0.75 {
-        didSet { lightExtractorEffect.equalMinHue = equalMinHue }
+        didSet { sparklesEffect.equalMinHue = equalMinHue }
     }
     public var equalMaxHue: Float = 0.083 {
-        didSet { lightExtractorEffect.equalMaxHue = equalMaxHue }
+        didSet { sparklesEffect.equalMaxHue = equalMaxHue }
     }
     public var equalSaturation: Float = 0.15 {
-        didSet { lightExtractorEffect.equalSaturation = equalSaturation }
+        didSet { sparklesEffect.equalSaturation = equalSaturation }
     }
     public var equalBrightness: Float = 2.0 {
-        didSet { lightExtractorEffect.equalBrightness = equalBrightness }
+        didSet { sparklesEffect.equalBrightness = equalBrightness }
     }
     public var speed: Float = 7.5 {
-        didSet { noiseEffect.speed = speed }
+        didSet { sparklesEffect.speed = speed }
     }
     public var rayCount: Int = 2 {
-        didSet { directionalShines.rayCount = rayCount }
+        didSet { sparklesEffect.rayCount = rayCount }
     }
      public var rayLength: Float = 0.08 {
-         didSet { directionalShines.rayLength = rayLength }
+         didSet { sparklesEffect.rayLength = rayLength }
      }
     public var startAngle: Int = 45 {
-        didSet { directionalShines.startAngle = startAngle }
+        didSet { sparklesEffect.startAngle = startAngle }
     }
     public var sparkleExposure: Float = 0.0 {
-        didSet {
-            exposureEffect.exposure = sparkleExposure
-            directionalShines.sparkleExposure = 2.0 + sparkleExposure
-        }
+        didSet { sparklesEffect.sparkleExposure = sparkleExposure }
     }
     public var blur: Float = 0 {
-        didSet { thirdBoxBlurEffect.kernelSize = blur * 2 }
+        didSet { boxBlurEffect.kernelSize = blur * 2 }
     }
     public var colorMode: ColorMode = .random {
         didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
@@ -55,43 +52,31 @@ public class Kirakira: OperationGroup {
         didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
     }
     public var minHue: Float = 0.0 {
-        didSet { lightExtractorEffect.minHue = minHue }
+        didSet { sparklesEffect.minHue = minHue }
     }
     public var maxHue: Float = 1.0 {
-        didSet { lightExtractorEffect.maxHue = maxHue }
+        didSet { sparklesEffect.maxHue = maxHue }
     }
     public var noiseInfluence: Float = 1.0 {
-        didSet { lightExtractorEffect.noiseInfluence = noiseInfluence }
+        didSet { sparklesEffect.noiseInfluence = noiseInfluence }
     }
     public var increasingRate: Float = 0.3 {
-        didSet { lightExtractorEffect.increasingRate = increasingRate }
+        didSet { sparklesEffect.increasingRate = increasingRate }
     }
     public var sparkleScale: Float = 0.7 {
-        didSet { noiseEffect.scale = sparkleScale }
+        didSet { sparklesEffect.sparkleScale = sparkleScale }
     }
     public var sparkleAmount: Float = 0.4 {
-        didSet { lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5}
+        didSet { sparklesEffect.sparkleAmount = sparkleAmount}
     }
     public var frameRate: Float = 60 {
-        didSet { noiseEffect.frameRate = Float(frameRate) }
+        didSet { sparklesEffect.frameRate = frameRate }
     }
 
-    private let firstBoxBlurEffect = CBBoxBlur()
-    private let secondBoxBlurEffect = CBBoxBlur()
-    private let thirdBoxBlurEffect = CBBoxBlur()
-
-    private let hsvValueEffect = CBHSV()
-    private let dilationEffect = CBDilation()
-
-    private let exposureEffect = ExposureAdjustment()
-
-    private let firstAddBlend = AddBlend()
-    private let noiseEffect = CBPerlineNoise()
-    private let lightExtractorEffect = CBKirakiraLightExtractor()
-    private let directionalShines = DirectionalShines()
+    private let sparklesEffect = Sparkles()
+    private let boxBlurEffect = CBBoxBlur()
     private let saturationEffect = SaturationAdjustment()
-    private let perlinNoiseEffect = CBPerlineNoise()
-    private let secondAddBlend = AddBlend()
+    private let addBlend = AddBlend()
 
     public override init() {
         super.init()
@@ -115,71 +100,23 @@ public class Kirakira: OperationGroup {
         ({sparkleAmount = 0.4})()
         ({frameRate = 60})()
 
-        noiseEffect.speed = speed
-        noiseEffect.scale = sparkleScale
-        noiseEffect.frameRate = frameRate
-
-        lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5
-        lightExtractorEffect.noiseInfluence = noiseInfluence
-        lightExtractorEffect.increasingRate = increasingRate
-        lightExtractorEffect.minHue = minHue
-        lightExtractorEffect.maxHue = maxHue
-        lightExtractorEffect.equalMinHue = equalMinHue
-        lightExtractorEffect.equalMaxHue = equalMaxHue
-        lightExtractorEffect.equalSaturation = equalSaturation
-        lightExtractorEffect.equalBrightness = equalBrightness
-
-        firstBoxBlurEffect.texelSizeX = 3
-        firstBoxBlurEffect.texelSizeY = 3
-        firstBoxBlurEffect.kernelSize = 5 * 2
-
-        hsvValueEffect.value = 0.7
-
-        dilationEffect.steps = 8
-        dilationEffect.texelStep = 3
-        dilationEffect.mode = 1
-        exposureEffect.exposure = sparkleExposure
-
-        secondBoxBlurEffect.texelSizeX = 2
-        secondBoxBlurEffect.texelSizeY = 2
-        secondBoxBlurEffect.kernelSize = 5 * 2
-
-        directionalShines.rayCount = rayCount
-        directionalShines.rayLength = rayLength
-        directionalShines.startAngle = startAngle
-        directionalShines.sparkleExposure = 2.0 + sparkleExposure
-
-        thirdBoxBlurEffect.texelSizeX = 2
-        thirdBoxBlurEffect.texelSizeY = 2
-        thirdBoxBlurEffect.kernelSize = blur * 2
+        boxBlurEffect.texelSizeX = 2
+        boxBlurEffect.texelSizeY = 2
+        boxBlurEffect.kernelSize = blur * 2
 
         self.configureGroup{
             input, output in
-            
-            input
-            --> perlinNoiseEffect
 
             input
-            --> lightExtractorEffect
-            --> firstBoxBlurEffect
-            --> hsvValueEffect
-            --> dilationEffect
-            --> exposureEffect
-            --> secondBoxBlurEffect
-            --> firstAddBlend
-            --> thirdBoxBlurEffect
+            --> sparklesEffect
+            --> boxBlurEffect
             --> saturationEffect
-            
-            lightExtractorEffect
-            --> directionalShines
-
-            perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
-            directionalShines.addTarget(firstAddBlend, atTargetIndex: 1)
-            saturationEffect.addTarget(secondAddBlend, atTargetIndex: 1)
 
             input
-            --> secondAddBlend
+            --> addBlend
             --> output
+
+            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
         }
     }
 }
