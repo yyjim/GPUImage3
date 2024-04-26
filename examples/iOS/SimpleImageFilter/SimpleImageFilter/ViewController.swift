@@ -7,7 +7,6 @@ class ViewController: UIViewController {
 
     var picture: PictureInput!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         renderView.contentMode = .scaleAspectFit
