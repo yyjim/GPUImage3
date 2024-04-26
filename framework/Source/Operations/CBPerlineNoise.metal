@@ -1,5 +1,5 @@
 //
-//  File.metal
+//  CBPerlineNoise.metal
 //  GPUImage_iOS
 //
 //  Created by Jim Wang on 2024/4/22.

@@ -1,5 +1,5 @@
 //
-//  Erosion.swift
+//  CBErosion.swift
 //  GPUImage
 //
 //  Created by Jim Wang on 2024/3/29.

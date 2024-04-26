@@ -130,7 +130,7 @@ public class Sparkles: OperationGroup {
         firstBoxBlurEffect.blurRadiusInPixels = 5
         blurEffect.blurRadiusInPixels = 5
 
-        setupPipeline()
+        setUpPipeline()
         updateDirectionalShines()
     }
 }
@@ -147,8 +147,8 @@ extension Sparkles {
         }
     }
 
-    private func setupPipeline() {
-        configureGroup{ input, output in
+    private func setUpPipeline() {
+        configureGroup { input, output in
 
             input
             --> perlinNoiseEffect

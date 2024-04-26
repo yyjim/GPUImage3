@@ -93,6 +93,7 @@ public class Kirakira: OperationGroup {
         self.rayCount = rayCount
         self.sparklesEffect = Sparkles(rayCount: rayCount)
         super.init()
+
         ({equalMinHue = 0.75})()
         ({equalMaxHue = 0.083})()
         ({equalSaturation = 0.15})()
@@ -113,19 +114,16 @@ public class Kirakira: OperationGroup {
         ({frameRate = 60})()
         ({centerSaturation = 0.3})()
 
-        self.configureGroup{
-            input, output in
-
+        self.configureGroup { input, output in
             input
             --> sparklesEffect
             --> blurEffect
             --> saturationEffect
+            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
 
             input
             --> addBlend
             --> output
-
-            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
         }
     }
 }
