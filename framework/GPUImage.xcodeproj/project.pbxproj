@@ -420,7 +420,7 @@
 		FB10DA712AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FB10DA722AF8F688000B1AEF /* Grain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10DA6E2AF8F688000B1AEF /* Grain.swift */; };
 		FBC104C52BB64C4D00FA0885 /* Kirakira.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104C42BB64C4D00FA0885 /* Kirakira.swift */; };
-		FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */; };
+		FBC104FB2BB6A36000FA0885 /* CBDirectionalBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EC2BB6A35F00FA0885 /* CBDirectionalBlur.metal */; };
 		FBC104FC2BB6A36000FA0885 /* CBDilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */; };
 		FBC104FD2BB6A36000FA0885 /* CBKirakiraLightExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */; };
 		FBC104FF2BB6A36000FA0885 /* CBErosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F02BB6A35F00FA0885 /* CBErosion.swift */; };
@@ -428,7 +428,7 @@
 		FBC105022BB6A36000FA0885 /* CBPerlineNoise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */; };
 		FBC105032BB6A36000FA0885 /* CBBoxBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */; };
 		FBC105042BB6A36000FA0885 /* CBDilation.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F52BB6A35F00FA0885 /* CBDilation.metal */; };
-		FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */; };
+		FBC105052BB6A36000FA0885 /* CBDirectionalBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F62BB6A35F00FA0885 /* CBDirectionalBlur.swift */; };
 		FBC105062BB6A36000FA0885 /* CBBoxBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */; };
 		FBC105072BB6A36000FA0885 /* CBLinearDogeBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F82BB6A35F00FA0885 /* CBLinearDogeBlend.swift */; };
 		FBC105082BB6A36000FA0885 /* CBHSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC104F92BB6A35F00FA0885 /* CBHSV.swift */; };
@@ -657,7 +657,7 @@
 		FB10DA6D2AF8F688000B1AEF /* Grain.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = Grain.metal; path = Source/Operations/Grain.metal; sourceTree = "<group>"; };
 		FB10DA6E2AF8F688000B1AEF /* Grain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grain.swift; path = Source/Operations/Grain.swift; sourceTree = "<group>"; };
 		FBC104C42BB64C4D00FA0885 /* Kirakira.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kirakira.swift; path = Source/Kirakira.swift; sourceTree = "<group>"; };
-		FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDirectionBlur.metal; path = Source/Operations/CBDirectionBlur.metal; sourceTree = "<group>"; };
+		FBC104EC2BB6A35F00FA0885 /* CBDirectionalBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDirectionalBlur.metal; path = Source/Operations/CBDirectionalBlur.metal; sourceTree = "<group>"; };
 		FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDilation.swift; path = Source/Operations/CBDilation.swift; sourceTree = "<group>"; };
 		FBC104EE2BB6A35F00FA0885 /* CBKirakiraLightExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBKirakiraLightExtractor.swift; path = Source/Operations/CBKirakiraLightExtractor.swift; sourceTree = "<group>"; };
 		FBC104F02BB6A35F00FA0885 /* CBErosion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBErosion.swift; path = Source/Operations/CBErosion.swift; sourceTree = "<group>"; };
@@ -665,7 +665,7 @@
 		FBC104F32BB6A35F00FA0885 /* CBPerlineNoise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBPerlineNoise.swift; path = Source/Operations/CBPerlineNoise.swift; sourceTree = "<group>"; };
 		FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBBoxBlur.swift; path = Source/Operations/CBBoxBlur.swift; sourceTree = "<group>"; };
 		FBC104F52BB6A35F00FA0885 /* CBDilation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBDilation.metal; path = Source/Operations/CBDilation.metal; sourceTree = "<group>"; };
-		FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDirectionBlur.swift; path = Source/Operations/CBDirectionBlur.swift; sourceTree = "<group>"; };
+		FBC104F62BB6A35F00FA0885 /* CBDirectionalBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBDirectionalBlur.swift; path = Source/Operations/CBDirectionalBlur.swift; sourceTree = "<group>"; };
 		FBC104F72BB6A35F00FA0885 /* CBBoxBlur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = CBBoxBlur.metal; path = Source/Operations/CBBoxBlur.metal; sourceTree = "<group>"; };
 		FBC104F82BB6A35F00FA0885 /* CBLinearDogeBlend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBLinearDogeBlend.swift; path = Source/Operations/CBLinearDogeBlend.swift; sourceTree = "<group>"; };
 		FBC104F92BB6A35F00FA0885 /* CBHSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBHSV.swift; path = Source/Operations/CBHSV.swift; sourceTree = "<group>"; };
@@ -996,8 +996,8 @@
 				FBC104F42BB6A35F00FA0885 /* CBBoxBlur.swift */,
 				FBC104F52BB6A35F00FA0885 /* CBDilation.metal */,
 				FBC104ED2BB6A35F00FA0885 /* CBDilation.swift */,
-				FBC104EC2BB6A35F00FA0885 /* CBDirectionBlur.metal */,
-				FBC104F62BB6A35F00FA0885 /* CBDirectionBlur.swift */,
+				FBC104EC2BB6A35F00FA0885 /* CBDirectionalBlur.metal */,
+				FBC104F62BB6A35F00FA0885 /* CBDirectionalBlur.swift */,
 				FBC104F22BB6A35F00FA0885 /* CBErosion.metal */,
 				FBC104F02BB6A35F00FA0885 /* CBErosion.swift */,
 				FBC104FA2BB6A35F00FA0885 /* CBHSV.metal */,
@@ -1163,7 +1163,7 @@
 				795ECAAE21ED2E48000EF927 /* ThresholdSketch.swift in Sources */,
 				79CB6E14210931BE0042F87B /* NormalBlend.swift in Sources */,
 				BC25F89A22C158E600CBBD15 /* BoxBlur.swift in Sources */,
-				FBC104FB2BB6A36000FA0885 /* CBDirectionBlur.metal in Sources */,
+				FBC104FB2BB6A36000FA0885 /* CBDirectionalBlur.metal in Sources */,
 				79CB6E0821092E330042F87B /* LuminosityBlend.swift in Sources */,
 				7957438D20FE790E001EAE0A /* LuminanceRangeReduction.swift in Sources */,
 				79A81C882100E1B700A3B43A /* LevelsAdjustment.swift in Sources */,
@@ -1234,7 +1234,7 @@
 				FBC105072BB6A36000FA0885 /* CBLinearDogeBlend.swift in Sources */,
 				FB10DA6F2AF8F688000B1AEF /* Grain.metal in Sources */,
 				BC7BA28420F59C8E006B5F4B /* MonochromeFilter.metal in Sources */,
-				FBC105052BB6A36000FA0885 /* CBDirectionBlur.swift in Sources */,
+				FBC105052BB6A36000FA0885 /* CBDirectionalBlur.swift in Sources */,
 				FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */,
 				79CB6E20210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B742125CBD50049135E /* AmatorkaFilter.swift in Sources */,

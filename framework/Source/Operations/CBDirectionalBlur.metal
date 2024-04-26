@@ -1,5 +1,5 @@
 //
-//  CBDirectionBlur.metal
+//  CBDirectionalBlur.metal
 //  GPUImage
 //
 //  Created by Jim Wang on 2024/3/29.
@@ -16,7 +16,7 @@ struct DirectionalBlurUniform
     float length;
 };
 
-fragment float4 directionBlurFragment(SingleInputVertexIO fragmentInput [[stage_in]],
+fragment float4 directionalBlurFragment(SingleInputVertexIO fragmentInput [[stage_in]],
                                       texture2d<float> inputTexture [[texture(0)]],
                                       constant DirectionalBlurUniform& uniform [[buffer(1)]])
 {

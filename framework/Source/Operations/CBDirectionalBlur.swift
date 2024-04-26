@@ -1,5 +1,5 @@
 //
-//  DirectionBlur.swift
+//  DirectionalBlur.swift
 //  GPUImage
 //
 //  Created by Jim Wang on 2024/3/29.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CBDirectionBlur: BasicOperation {
+public class CBDirectionalBlur: BasicOperation {
     // 0.0 ~ 360.0
     public var degree: Float = 45.0 {
         didSet {
@@ -20,7 +20,7 @@ public class CBDirectionBlur: BasicOperation {
     public var length: Float = 0.15 { didSet { uniformSettings["length"] = length } }
 
     public init() {
-        super.init(fragmentFunctionName:"directionBlurFragment", numberOfInputs:1)
+        super.init(fragmentFunctionName:"directionalBlurFragment", numberOfInputs:1)
         ({
             degree = 45.0
             length = 0.15
