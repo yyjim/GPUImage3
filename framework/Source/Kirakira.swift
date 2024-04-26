@@ -15,18 +15,22 @@ public class Kirakira: OperationGroup {
         case random = 1
     }
 
-    // boxBlurEffect
-    public var blur: Float = 0 {
-        didSet { boxBlurEffect.kernelSize = blur * 2 }
-    }
-    // saturationEffect
+    // MARK: Properties
+
+    // Saturation
     public var colorMode: ColorMode = .random {
-        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+        didSet {
+            updateSaturation()
+            updateSparkleSaturation()
+        }
     }
     public var saturation: Float = 0.3 {
-        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+        didSet { updateSaturation() }
     }
-
+    // Sparkles
+    public var centerSaturation: Float = 0.3 {
+        didSet { updateSparkleSaturation() }
+    }
     public var equalMinHue: Float = 0.75 {
         didSet { sparklesEffect.equalMinHue = equalMinHue }
     }
@@ -73,9 +77,15 @@ public class Kirakira: OperationGroup {
     public var frameRate: Float = 60 {
         didSet { sparklesEffect.frameRate = frameRate }
     }
+    // Blur
+    public var blur: Int = 0 {
+        didSet { boxBlurEffect.blurRadiusInPixels = Float(blur) }
+    }
+
+    // MARK: Effects
 
     private let sparklesEffect: Sparkles
-    private let boxBlurEffect = CBBoxBlur()
+    private let boxBlurEffect = GaussianBlur()
     private let saturationEffect = SaturationAdjustment()
     private let addBlend = AddBlend()
 
@@ -101,10 +111,7 @@ public class Kirakira: OperationGroup {
         ({sparkleScale = 0.7})()
         ({sparkleAmount = 0.4})()
         ({frameRate = 60})()
-
-        boxBlurEffect.texelSizeX = 2
-        boxBlurEffect.texelSizeY = 2
-        boxBlurEffect.kernelSize = blur * 2
+        ({centerSaturation = 0.3})()
 
         self.configureGroup{
             input, output in
@@ -120,5 +127,15 @@ public class Kirakira: OperationGroup {
 
             saturationEffect.addTarget(addBlend, atTargetIndex: 1)
         }
+    }
+}
+
+private extension Kirakira {
+    func updateSaturation() {
+        saturationEffect.saturation = saturation * Float(colorMode.rawValue)
+    }
+
+    func updateSparkleSaturation() {
+        sparklesEffect.centerSaturation = centerSaturation * Float(colorMode.rawValue)
     }
 }

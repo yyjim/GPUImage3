@@ -33,8 +33,10 @@ final class DirectionalShine: OperationGroup {
 
     override init() {
         super.init()
+        ({rayLength = 0.08})()
+        ({degree = 45.0})()
+        ({sparkleExposure = 2})()
 
-        
         self.configureGroup { input, output in
             input
             --> firstDirectionalBlurEffect

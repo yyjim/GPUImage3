@@ -56,7 +56,6 @@ public class Sparkles: OperationGroup {
         didSet { lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5}
     }
     // DirectionalBlurs
-    public let rayCount: Int
     public var rayLength: Float = 0.08 {
         didSet { updateDirectionalShines() }
     }
@@ -66,6 +65,10 @@ public class Sparkles: OperationGroup {
     public var sparkleExposure: Float = 0.0 {
         didSet { updateDirectionalShines() }
     }
+    // Saturation
+    public var centerSaturation: Float = 1.3 {
+        didSet { saturationEffect.saturation = centerSaturation }
+    }
 
     // MARK: - Effects
 
@@ -73,48 +76,59 @@ public class Sparkles: OperationGroup {
     private let perlinNoiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
 
-    // center / sparkles
-    private let firstBoxBlurEffect = CBBoxBlur()
+    // center texture
+    private let firstBoxBlurEffect = GaussianBlur()
     private let hsvValueEffect = CBHSV()
-
-    private let dilationEffect = CBDilation()
+    private let firstDilationEffect = CBDilation()
+    private let secondDilationEffect = CBDilation()
     private let exposureEffect = ExposureAdjustment()
-    private let secondBoxBlurEffect = CBBoxBlur()
+    private let blurEffect = GaussianBlur()
+    private let saturationEffect = SaturationAdjustment()
 
-    // ray
+    // sparkle ray
+    private let rayCount: Int
+    private let directionalShines: [DirectionalShine]
+    private let addBlendEffects: [AddBlend]
     private var erosionEffect = CBErosion()
-
-    private lazy var directionalShines: [DirectionalShine] = {
-        Array(0...rayCount).map { _ in
-            DirectionalShine()
-        }
-    }()
-    private lazy var addBlendEffects: [AddBlend] = {
-        Array(0...rayCount).map { _ in
-            AddBlend()
-        }
-    }()
 
     public init(rayCount: Int = 2) {
         self.rayCount = rayCount
+        // NOTE: Do not use Array(repeat:count:) here
+        // It will create only one instance and set it up in all element slots, which does not work for our scenario.
+        self.directionalShines = Array(0...rayCount)
+            .map { _ in DirectionalShine() }
+        self.addBlendEffects = Array(0...rayCount)
+            .map { _ in AddBlend() }
         super.init()
+
+        ({equalMinHue = 0.75})()
+        ({equalMaxHue = 0.083})()
+        ({equalSaturation = 0.15})()
+        ({equalBrightness = 2.0})()
+        ({speed = 7.5})()
+        ({rayLength = 0.08})()
+        ({sparkleExposure = 0.0})()
+        ({minHue = 0.0})()
+        ({maxHue = 1.0})()
+        ({noiseInfluence = 1.0})()
+        ({increasingRate = 0.3})()
+        ({startAngle = 45})()
+        ({sparkleScale = 0.7})()
+        ({sparkleAmount = 0.4})()
+        ({frameRate = 60})()
+        ({centerSaturation = 1.3})()
 
         erosionEffect.steps = 6
         erosionEffect.texelSize = 3
-
-        firstBoxBlurEffect.texelSizeX = 3
-        firstBoxBlurEffect.texelSizeY = 3
-        firstBoxBlurEffect.kernelSize = 5 * 2
-
         hsvValueEffect.value = 0.7
-
-        dilationEffect.steps = 8
-        dilationEffect.texelStep = 3
-        dilationEffect.mode = 1
-
-        secondBoxBlurEffect.texelSizeX = 2
-        secondBoxBlurEffect.texelSizeY = 2
-        secondBoxBlurEffect.kernelSize = 5 * 2
+        firstDilationEffect.steps = 5
+        firstDilationEffect.texelStep = 3
+        firstDilationEffect.mode = 1
+        secondDilationEffect.steps = 8
+        secondDilationEffect.texelStep = 3
+        secondDilationEffect.mode = 1
+        firstBoxBlurEffect.blurRadiusInPixels = 5
+        blurEffect.blurRadiusInPixels = 5
 
         setupPipeline()
         updateDirectionalShines()
@@ -132,6 +146,7 @@ extension Sparkles {
             directionalShines[i].sparkleExposure = 2 + sparkleExposure
         }
     }
+
     private func setupPipeline() {
         configureGroup{ input, output in
 
@@ -141,16 +156,17 @@ extension Sparkles {
 
             input
             --> lightExtractorEffect    // lightMapTexture
-            --> firstBoxBlurEffect
+            --> firstDilationEffect
             --> hsvValueEffect
-            --> dilationEffect          // boxBlurredTexture
+            --> secondDilationEffect         // boxBlurredTexture
             --> exposureEffect
-            --> secondBoxBlurEffect     // centerTexture
+            --> blurEffect     // centerTexture
+            --> saturationEffect
 
             lightExtractorEffect
             --> erosionEffect           // erodedLightTexture
 
-            var node: ImageProcessingOperation = secondBoxBlurEffect
+            var node: ImageProcessingOperation = saturationEffect
 
             for i in 0 ..< rayCount {
                 let addBend = addBlendEffects[i]
