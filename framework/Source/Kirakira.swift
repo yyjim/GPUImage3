@@ -15,6 +15,18 @@ public class Kirakira: OperationGroup {
         case random = 1
     }
 
+    // boxBlurEffect
+    public var blur: Float = 0 {
+        didSet { boxBlurEffect.kernelSize = blur * 2 }
+    }
+    // saturationEffect
+    public var colorMode: ColorMode = .random {
+        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+    }
+    public var saturation: Float = 0.3 {
+        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
+    }
+
     public var equalMinHue: Float = 0.75 {
         didSet { sparklesEffect.equalMinHue = equalMinHue }
     }
@@ -41,15 +53,6 @@ public class Kirakira: OperationGroup {
     }
     public var sparkleExposure: Float = 0.0 {
         didSet { sparklesEffect.sparkleExposure = sparkleExposure }
-    }
-    public var blur: Float = 0 {
-        didSet { boxBlurEffect.kernelSize = blur * 2 }
-    }
-    public var colorMode: ColorMode = .random {
-        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
-    }
-    public var saturation: Float = 0.3 {
-        didSet { saturationEffect.saturation = saturation * Float(colorMode.rawValue) }
     }
     public var minHue: Float = 0.0 {
         didSet { sparklesEffect.minHue = minHue }
@@ -111,12 +114,12 @@ public class Kirakira: OperationGroup {
             --> sparklesEffect
             --> boxBlurEffect
             --> saturationEffect
-//
-//            input
-//            --> addBlend
+
+            input
+            --> addBlend
             --> output
 
-//            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
+            saturationEffect.addTarget(addBlend, atTargetIndex: 1)
         }
     }
 }

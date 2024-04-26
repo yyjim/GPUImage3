@@ -17,6 +17,7 @@ public class Sparkles: OperationGroup {
 
     // MARK: - Properties
 
+    // Noise
     public var speed: Float = 7.5 {
         didSet { perlinNoiseEffect.speed = speed }
     }
@@ -26,7 +27,7 @@ public class Sparkles: OperationGroup {
     public var frameRate: Float = 60 {
         didSet { perlinNoiseEffect.frameRate = frameRate }
     }
-    //
+    // LightExtractor
     public var equalMinHue: Float = 0.75 {
         didSet { lightExtractorEffect.equalMinHue = equalMinHue }
     }
@@ -54,9 +55,9 @@ public class Sparkles: OperationGroup {
     public var sparkleAmount: Float = 0.4 {
         didSet { lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5}
     }
-    //
+    // DirectionalBlurs
     public var rayCount: Int = 2 {
-        didSet { resetSubEffects() }
+        didSet { resetEffects() }
     }
     public var rayLength: Float = 0.08 {
         didSet { updateDirectionalShines() }
@@ -70,12 +71,11 @@ public class Sparkles: OperationGroup {
 
     // MARK: - Effects
 
+    // light map
     private let perlinNoiseEffect = CBPerlineNoise()
     private let lightExtractorEffect = CBKirakiraLightExtractor()
 
-    private var directionalShines: [DirectionalShine] = []
-    private var addBlendEffects: [AddBlend] = []
-
+    // center / sparkles
     private let firstBoxBlurEffect = CBBoxBlur()
     private let hsvValueEffect = CBHSV()
 
@@ -83,40 +83,37 @@ public class Sparkles: OperationGroup {
     private let exposureEffect = ExposureAdjustment()
     private let secondBoxBlurEffect = CBBoxBlur()
 
-    private let firstAddBlend = AddBlend()
+    // ray
+    private var erosionEffect = CBErosion()
+    private var directionalShines: [DirectionalShine] = [] {
+        didSet { print("🌲", Date()) }
+    }
+    private var addBlendEffects: [AddBlend] = []
 
+    private var effects: [ImageProcessingOperation] {
+        [
+            perlinNoiseEffect,
+            lightExtractorEffect,
+            firstBoxBlurEffect,
+            hsvValueEffect,
+            dilationEffect,
+            exposureEffect,
+            secondBoxBlurEffect,
+            erosionEffect
+        ] 
+        + addBlendEffects
+        + directionalShines
+    }
+
+    deinit {
+        print("🦖 sparkle fire")
+    }
     public override init() {
         super.init()
-        ({equalMinHue = 0.75})()
-        ({equalMaxHue = 0.083})()
-        ({equalSaturation = 0.15})()
-        ({equalBrightness = 2.0})()
-        ({speed = 7.5})()
-        ({rayCount = 2})()
-        ({rayLength = 0.08})()
-        ({sparkleExposure = 0.0})()
-        ({minHue = 0.0})()
-        ({maxHue = 1.0})()
-        ({noiseInfluence = 1.0})()
-        ({increasingRate = 0.3})()
-        ({startAngle = 45})()
-        ({sparkleScale = 0.7})()
-        ({sparkleAmount = 0.4})()
-        ({frameRate = 60})()
+        resetEffects()
 
-        perlinNoiseEffect.speed = speed
-        perlinNoiseEffect.scale = sparkleScale
-        perlinNoiseEffect.frameRate = frameRate
-
-        lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5
-        lightExtractorEffect.noiseInfluence = noiseInfluence
-        lightExtractorEffect.increasingRate = increasingRate
-        lightExtractorEffect.minHue = minHue
-        lightExtractorEffect.maxHue = maxHue
-        lightExtractorEffect.equalMinHue = equalMinHue
-        lightExtractorEffect.equalMaxHue = equalMaxHue
-        lightExtractorEffect.equalSaturation = equalSaturation
-        lightExtractorEffect.equalBrightness = equalBrightness
+        erosionEffect.steps = 6
+        erosionEffect.texelSize = 3
 
         firstBoxBlurEffect.texelSizeX = 3
         firstBoxBlurEffect.texelSizeY = 3
@@ -127,13 +124,10 @@ public class Sparkles: OperationGroup {
         dilationEffect.steps = 8
         dilationEffect.texelStep = 3
         dilationEffect.mode = 1
-        exposureEffect.exposure = sparkleExposure
 
         secondBoxBlurEffect.texelSizeX = 2
         secondBoxBlurEffect.texelSizeY = 2
         secondBoxBlurEffect.kernelSize = 5 * 2
-
-        resetSubEffects()
     }
 }
 
@@ -141,67 +135,68 @@ public class Sparkles: OperationGroup {
 extension Sparkles {
 
     private func updateDirectionalShines() {
-        let intervalDegree = 180.0 / Float(rayCount)
+        let intervalDegree: Float = 180.0 / Float(rayCount)
         directionalShines
             .enumerated()
             .forEach { index, directionalShine in
                 directionalShine.degree = Float(startAngle) + (Float(index) * intervalDegree)
                 directionalShine.rayLength = rayLength
-                directionalShine.sparkleExposure = sparkleExposure
+                directionalShine.sparkleExposure = 2 + sparkleExposure
             }
     }
 
-    private func resetSubEffects() {
-        directionalShines.forEach {
-            $0.removeAllTargets()
+    private func resetEffects() {
+        resetPipeline()
+        effects.forEach {
             $0.resetPipeline()
         }
-        directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
 
-        addBlendEffects.forEach {
-            $0.removeAllTargets()
-            $0.resetPipeline()
-        }
+        directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
         addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
 
-        resetPipeline()
-        removeAllTargets()
-
-        setupPipeline()
         updateDirectionalShines()
+        setupPipeline()
     }
 
     private func setupPipeline() {
-        configureGroup{
-            input, output in
+        configureGroup{ input, output in
 
             input
             --> perlinNoiseEffect
             perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
 
             input
-            // lightMap
-            --> lightExtractorEffect
-            // boxBlurredTexture
+            --> lightExtractorEffect // lightMapTexture
             --> firstBoxBlurEffect
             --> hsvValueEffect
-            --> dilationEffect
-            // centerTexture/sparkleTexture
+            --> dilationEffect // boxBlurredTexture
             --> exposureEffect
-            --> secondBoxBlurEffect
+            --> secondBoxBlurEffect // centerTexture/sparkleTexture
+
+            lightExtractorEffect
+            --> erosionEffect // erodedLightTexture
 
             // ray
-            var input: ImageProcessingOperation = secondBoxBlurEffect
+            var sparklesInput: ImageProcessingOperation = secondBoxBlurEffect
 
+            var index = 0
             for (addBlend, directionalShine) in zip(addBlendEffects, directionalShines) {
-                lightExtractorEffect --> directionalShine
-                directionalShine.addTarget(addBlend, atTargetIndex: 1)
+                if index != 1 {
+                    erosionEffect --> directionalShine
+                }
 
-                input --> addBlend
-                input = addBlend
+                if index == 0 {
+                    sparklesInput = directionalShine
+                } else {
+                    sparklesInput --> addBlend
+                    directionalShine.addTarget(addBlend, atTargetIndex: 1)
+
+                    sparklesInput = addBlend
+                }
+                index += 1
             }
 
-            input
+            sparklesInput
             --> output
         }
     }

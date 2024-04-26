@@ -21,13 +21,12 @@ final class DirectionalShine: OperationGroup {
             secondDirectionalBlurEffect.degree = degree
         }
     }
-    var sparkleExposure: Float = 0.0 {
+    var sparkleExposure: Float = 2 {
         didSet {
-            exposureEffect.exposure = sparkleExposure
+            exposureEffect.exposure = 2 + sparkleExposure
         }
     }
 
-    private var erosionEffect = CBErosion()
     private let exposureEffect = ExposureAdjustment()
     private let firstDirectionalBlurEffect = CBDirectionBlur()
     private let secondDirectionalBlurEffect = CBDirectionBlur()
@@ -35,12 +34,9 @@ final class DirectionalShine: OperationGroup {
     override init() {
         super.init()
 
-        erosionEffect.steps = 6
-        erosionEffect.texelSize = 3
         
         self.configureGroup { input, output in
             input
-            --> erosionEffect
             --> firstDirectionalBlurEffect
             --> exposureEffect
             --> secondDirectionalBlurEffect
