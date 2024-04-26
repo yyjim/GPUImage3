@@ -17,17 +17,17 @@ public class Kirakira: OperationGroup {
 
     // MARK: Properties
 
-    // Saturation
     public var colorMode: ColorMode = .random {
         didSet {
             updateSaturation()
             updateSparkleSaturation()
         }
     }
+    // For saturation effect
     public var saturation: Float = 0.3 {
         didSet { updateSaturation() }
     }
-    // Sparkles
+    // For sparkles effect
     public var centerSaturation: Float = 0.3 {
         didSet { updateSparkleSaturation() }
     }
@@ -77,15 +77,15 @@ public class Kirakira: OperationGroup {
     public var frameRate: Float = 60 {
         didSet { sparklesEffect.frameRate = frameRate }
     }
-    // Blur
+    // For the blur effect
     public var blur: Int = 0 {
-        didSet { boxBlurEffect.blurRadiusInPixels = Float(blur) }
+        didSet { blurEffect.blurRadiusInPixels = Float(blur) }
     }
 
     // MARK: Effects
 
     private let sparklesEffect: Sparkles
-    private let boxBlurEffect = GaussianBlur()
+    private let blurEffect = GaussianBlur()
     private let saturationEffect = SaturationAdjustment()
     private let addBlend = AddBlend()
 
@@ -118,7 +118,7 @@ public class Kirakira: OperationGroup {
 
             input
             --> sparklesEffect
-            --> boxBlurEffect
+            --> blurEffect
             --> saturationEffect
 
             input
