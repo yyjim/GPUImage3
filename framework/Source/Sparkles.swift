@@ -84,38 +84,32 @@ public class Sparkles: OperationGroup {
     // ray
     private var erosionEffect = CBErosion()
 
-    private let directionalShineTuple = (
-        DirectionalShine(),
-        DirectionalShine(),
-        DirectionalShine(),
-        DirectionalShine(),
-        DirectionalShine()
-    )
-    private var directionalShines: [DirectionalShine] {
-        [
-            directionalShineTuple.0,
-            directionalShineTuple.1,
-            directionalShineTuple.2,
-            directionalShineTuple.3,
-            directionalShineTuple.4
-        ]
-    }
-    private let addBlendsTuple = (
-        AddBlend(),
-        AddBlend(),
-        AddBlend(),
-        AddBlend(),
-        AddBlend()
-    )
-    private var addBlendEffects: [AddBlend] {
-        [
-            addBlendsTuple.0,
-            addBlendsTuple.1,
-            addBlendsTuple.2,
-            addBlendsTuple.3,
-            addBlendsTuple.4
-        ]
-    }
+    private lazy var directionalShines: [DirectionalShine] = {
+        Array(0...rayCount).map { _ in
+            DirectionalShine()
+        }
+        Array(repeating: DirectionalShine(), count: 5)
+//        [
+//            DirectionalShine(),
+//            DirectionalShine(),
+//            DirectionalShine(),
+//            DirectionalShine(),
+//            DirectionalShine()
+//        ]
+    }()
+    private lazy var addBlendEffects: [AddBlend] = {
+        Array(0...rayCount).map { _ in
+            AddBlend()
+        }
+//        Array(repeating: AddBlend(), count: 5)
+//        [
+//            AddBlend(),
+//            AddBlend(),
+//            AddBlend(),
+//            AddBlend(),
+//            AddBlend()
+//        ]
+    }()
 
     public init(rayCount: Int = 2) {
         self.rayCount = rayCount
