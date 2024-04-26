@@ -158,10 +158,10 @@ extension Sparkles {
             --> lightExtractorEffect    // lightMapTexture
             --> firstDilationEffect
             --> hsvValueEffect
-            --> secondDilationEffect         // boxBlurredTexture
+            --> secondDilationEffect
             --> exposureEffect
-            --> blurEffect     // centerTexture
-            --> saturationEffect
+            --> blurEffect
+            --> saturationEffect        // centerTexture
 
             lightExtractorEffect
             --> erosionEffect           // erodedLightTexture
