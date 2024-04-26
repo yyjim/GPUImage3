@@ -83,13 +83,42 @@ public class Sparkles: OperationGroup {
 
     // ray
     private var erosionEffect = CBErosion()
-    private let directionalShines: [DirectionalShine]
-    private let addBlendEffects: [AddBlend]
+
+    private let directionalShineTuple = (
+        DirectionalShine(),
+        DirectionalShine(),
+        DirectionalShine(),
+        DirectionalShine(),
+        DirectionalShine()
+    )
+    private var directionalShines: [DirectionalShine] {
+        [
+            directionalShineTuple.0,
+            directionalShineTuple.1,
+            directionalShineTuple.2,
+            directionalShineTuple.3,
+            directionalShineTuple.4
+        ]
+    }
+    private let addBlendsTuple = (
+        AddBlend(),
+        AddBlend(),
+        AddBlend(),
+        AddBlend(),
+        AddBlend()
+    )
+    private var addBlendEffects: [AddBlend] {
+        [
+            addBlendsTuple.0,
+            addBlendsTuple.1,
+            addBlendsTuple.2,
+            addBlendsTuple.3,
+            addBlendsTuple.4
+        ]
+    }
 
     public init(rayCount: Int = 2) {
         self.rayCount = rayCount
-        self.addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
-        self.directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
         super.init()
 
         erosionEffect.steps = 6
