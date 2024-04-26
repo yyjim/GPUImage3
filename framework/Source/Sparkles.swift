@@ -88,27 +88,11 @@ public class Sparkles: OperationGroup {
         Array(0...rayCount).map { _ in
             DirectionalShine()
         }
-        Array(repeating: DirectionalShine(), count: 5)
-//        [
-//            DirectionalShine(),
-//            DirectionalShine(),
-//            DirectionalShine(),
-//            DirectionalShine(),
-//            DirectionalShine()
-//        ]
     }()
     private lazy var addBlendEffects: [AddBlend] = {
         Array(0...rayCount).map { _ in
             AddBlend()
         }
-//        Array(repeating: AddBlend(), count: 5)
-//        [
-//            AddBlend(),
-//            AddBlend(),
-//            AddBlend(),
-//            AddBlend(),
-//            AddBlend()
-//        ]
     }()
 
     public init(rayCount: Int = 2) {
