@@ -56,9 +56,7 @@ public class Sparkles: OperationGroup {
         didSet { lightExtractorEffect.luminanceThreshold = 1.0 - sparkleAmount * 0.5}
     }
     // DirectionalBlurs
-    public var rayCount: Int = 2 {
-        didSet { resetEffects() }
-    }
+    public let rayCount: Int
     public var rayLength: Float = 0.08 {
         didSet { updateDirectionalShines() }
     }
@@ -85,32 +83,14 @@ public class Sparkles: OperationGroup {
 
     // ray
     private var erosionEffect = CBErosion()
-    private var directionalShines: [DirectionalShine] = [] {
-        didSet { print("🌲", Date()) }
-    }
-    private var addBlendEffects: [AddBlend] = []
+    private let directionalShines: [DirectionalShine]
+    private let addBlendEffects: [AddBlend]
 
-    private var effects: [ImageProcessingOperation] {
-        [
-            perlinNoiseEffect,
-            lightExtractorEffect,
-            firstBoxBlurEffect,
-            hsvValueEffect,
-            dilationEffect,
-            exposureEffect,
-            secondBoxBlurEffect,
-            erosionEffect
-        ] 
-        + addBlendEffects
-        + directionalShines
-    }
-
-    deinit {
-        print("🦖 sparkle fire")
-    }
-    public override init() {
+    public init(rayCount: Int = 2) {
+        self.rayCount = rayCount
+        self.addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
+        self.directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
         super.init()
-        resetEffects()
 
         erosionEffect.steps = 6
         erosionEffect.texelSize = 3
@@ -128,6 +108,9 @@ public class Sparkles: OperationGroup {
         secondBoxBlurEffect.texelSizeX = 2
         secondBoxBlurEffect.texelSizeY = 2
         secondBoxBlurEffect.kernelSize = 5 * 2
+
+        setupPipeline()
+        updateDirectionalShines()
     }
 }
 
@@ -136,28 +119,12 @@ extension Sparkles {
 
     private func updateDirectionalShines() {
         let intervalDegree: Float = 180.0 / Float(rayCount)
-        directionalShines
-            .enumerated()
-            .forEach { index, directionalShine in
-                directionalShine.degree = Float(startAngle) + (Float(index) * intervalDegree)
-                directionalShine.rayLength = rayLength
-                directionalShine.sparkleExposure = 2 + sparkleExposure
-            }
-    }
-
-    private func resetEffects() {
-        resetPipeline()
-        effects.forEach {
-            $0.resetPipeline()
+        for i in 0 ..< rayCount {
+            directionalShines[i].degree = Float(startAngle) + (Float(i) * intervalDegree)
+            directionalShines[i].rayLength = rayLength
+            directionalShines[i].sparkleExposure = 2 + sparkleExposure
         }
-
-        directionalShines = Array(repeating: DirectionalShine(), count: rayCount)
-        addBlendEffects = Array(repeating: AddBlend(), count: rayCount)
-
-        updateDirectionalShines()
-        setupPipeline()
     }
-
     private func setupPipeline() {
         configureGroup{ input, output in
 
@@ -166,37 +133,30 @@ extension Sparkles {
             perlinNoiseEffect.addTarget(lightExtractorEffect, atTargetIndex: 1)
 
             input
-            --> lightExtractorEffect // lightMapTexture
+            --> lightExtractorEffect    // lightMapTexture
             --> firstBoxBlurEffect
             --> hsvValueEffect
-            --> dilationEffect // boxBlurredTexture
+            --> dilationEffect          // boxBlurredTexture
             --> exposureEffect
-            --> secondBoxBlurEffect // centerTexture/sparkleTexture
+            --> secondBoxBlurEffect     // centerTexture
 
             lightExtractorEffect
-            --> erosionEffect // erodedLightTexture
+            --> erosionEffect           // erodedLightTexture
 
-            // ray
-            var sparklesInput: ImageProcessingOperation = secondBoxBlurEffect
+            var node: ImageProcessingOperation = secondBoxBlurEffect
 
-            var index = 0
-            for (addBlend, directionalShine) in zip(addBlendEffects, directionalShines) {
-                if index != 1 {
-                    erosionEffect --> directionalShine
-                }
+            for i in 0 ..< rayCount {
+                let addBend = addBlendEffects[i]
+                let directionalShine = directionalShines[i]
 
-                if index == 0 {
-                    sparklesInput = directionalShine
-                } else {
-                    sparklesInput --> addBlend
-                    directionalShine.addTarget(addBlend, atTargetIndex: 1)
+                erosionEffect --> directionalShine // rayTexture
+                directionalShine.addTarget(addBend, atTargetIndex: 1)
 
-                    sparklesInput = addBlend
-                }
-                index += 1
+                node --> addBend // sparkleTexture
+                node = addBend
             }
 
-            sparklesInput
+            node
             --> output
         }
     }

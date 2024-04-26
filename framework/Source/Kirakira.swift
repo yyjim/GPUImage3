@@ -42,12 +42,10 @@ public class Kirakira: OperationGroup {
     public var speed: Float = 7.5 {
         didSet { sparklesEffect.speed = speed }
     }
-    public var rayCount: Int = 2 {
-        didSet { sparklesEffect.rayCount = rayCount }
+    public let rayCount: Int
+    public var rayLength: Float = 0.08 {
+        didSet { sparklesEffect.rayLength = rayLength }
     }
-     public var rayLength: Float = 0.08 {
-         didSet { sparklesEffect.rayLength = rayLength }
-     }
     public var startAngle: Int = 45 {
         didSet { sparklesEffect.startAngle = startAngle }
     }
@@ -76,19 +74,20 @@ public class Kirakira: OperationGroup {
         didSet { sparklesEffect.frameRate = frameRate }
     }
 
-    private let sparklesEffect = Sparkles()
+    private let sparklesEffect: Sparkles
     private let boxBlurEffect = CBBoxBlur()
     private let saturationEffect = SaturationAdjustment()
     private let addBlend = AddBlend()
 
-    public override init() {
+    public init(rayCount: Int = 2) {
+        self.rayCount = rayCount
+        self.sparklesEffect = Sparkles(rayCount: rayCount)
         super.init()
         ({equalMinHue = 0.75})()
         ({equalMaxHue = 0.083})()
         ({equalSaturation = 0.15})()
         ({equalBrightness = 2.0})()
         ({speed = 7.5})()
-        ({rayCount = 2})()
         ({rayLength = 0.08})()
         ({sparkleExposure = 0.0})()
         ({blur = 0})()
