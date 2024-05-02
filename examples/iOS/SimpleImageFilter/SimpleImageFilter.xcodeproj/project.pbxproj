@@ -399,6 +399,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = F6J8B455GU;
 				INFOPLIST_FILE = SimpleImageFilter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redqueencoder.SimpleImageFilter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -417,6 +418,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = F6J8B455GU;
 				INFOPLIST_FILE = SimpleImageFilter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redqueencoder.SimpleImageFilter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
