@@ -74,5 +74,13 @@
     "frameRate" : {
         "type" : "int",
         "value" : 60
-    }
+    },
+    "targetDimension" :{
+        "type" : "int",
+        "value" : 1024
+    },
+    "sparkleScale" : {
+        "type" : "float",
+        "value" : 0.7
+    },
 }
