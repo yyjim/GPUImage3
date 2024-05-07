@@ -32,7 +32,6 @@ public class Kirakira: OperationGroup {
         public var maxHue: Float
         public var noiseInfluence: Float
         public var increasingRate: Float
-        public var sparkleScale: Float
         public var sparkleAmount: Float
         public var frameRate: Float
         public var blur: Int
@@ -50,13 +49,12 @@ public class Kirakira: OperationGroup {
             rayCount: Int = 5,
             rayLength: Float = 0.5,
             startAngle: Int = 45,
-            sparkleExposure: Float = 0.0,
+            sparkleExposure: Float = 0.1,
             minHue: Float = 0.0,
             maxHue: Float = 1.0,
             noiseInfluence: Float = 1.0,
             increasingRate: Float = 0.03,
-            sparkleScale: Float = 0.7,
-            sparkleAmount: Float = 0.6,
+            sparkleAmount: Float = 1.0,
             frameRate: Float = 60,
             blur: Int = 0,
             targetDimension: Int = 1024
@@ -77,7 +75,6 @@ public class Kirakira: OperationGroup {
             self.maxHue = maxHue
             self.noiseInfluence = noiseInfluence
             self.increasingRate = increasingRate
-            self.sparkleScale = sparkleScale
             self.sparkleAmount = sparkleAmount
             self.frameRate = frameRate
             self.blur = blur
@@ -87,6 +84,7 @@ public class Kirakira: OperationGroup {
 
     // MARK: Properties
 
+    // 100 - 2000
     public var targetDimension: Int = 1024 {
         didSet { blendImageRescaleEffect.targetDimension = targetDimension }
     }
@@ -104,29 +102,34 @@ public class Kirakira: OperationGroup {
     public var centerSaturation: Float = 0.3 {
         didSet { updateSparkleSaturation() }
     }
-    public var equalMinHue: Float = 0.75 {
+    public var equalMinHue: Float = 0.54 {
         didSet { sparklesEffect.equalMinHue = equalMinHue }
     }
-    public var equalMaxHue: Float = 0.083 {
+    public var equalMaxHue: Float = 0 {
         didSet { sparklesEffect.equalMaxHue = equalMaxHue }
     }
     public var equalSaturation: Float = 0.15 {
         didSet { sparklesEffect.equalSaturation = equalSaturation }
     }
-    public var equalBrightness: Float = 2.0 {
+    // 0 - 5
+    public var equalBrightness: Float = 2.8 {
         didSet { sparklesEffect.equalBrightness = equalBrightness }
     }
+    // 0 - 10
     public var speed: Float = 7.5 {
         didSet { sparklesEffect.speed = speed }
     }
+    // 1 - 5
     public let rayCount: Int
     public var rayLength: Float = 0.08 {
         didSet { sparklesEffect.rayLength = rayLength }
     }
+    // 0 - 360
     public var startAngle: Int = 45 {
         didSet { sparklesEffect.startAngle = startAngle }
     }
-    public var sparkleExposure: Float = 0.0 {
+    // -1.0 - 1.0
+    public var sparkleExposure: Float = 0.1 {
         didSet { sparklesEffect.sparkleExposure = sparkleExposure }
     }
     public var minHue: Float = 0.0 {
@@ -141,12 +144,10 @@ public class Kirakira: OperationGroup {
     public var increasingRate: Float = 0.3 {
         didSet { sparklesEffect.increasingRate = increasingRate }
     }
-    public var sparkleScale: Float = 0.7 {
-        didSet { sparklesEffect.sparkleScale = sparkleScale }
-    }
-    public var sparkleAmount: Float = 0.4 {
+    public var sparkleAmount: Float = 1.0 {
         didSet { sparklesEffect.sparkleAmount = sparkleAmount}
     }
+    // 1 - 120
     public var frameRate: Float = 60 {
         didSet { sparklesEffect.frameRate = frameRate }
     }
@@ -185,7 +186,6 @@ public class Kirakira: OperationGroup {
             maxHue = parameters.maxHue
             noiseInfluence = parameters.noiseInfluence
             increasingRate = parameters.increasingRate
-            sparkleScale = parameters.sparkleScale
             sparkleAmount = parameters.sparkleAmount
             frameRate = parameters.frameRate
             blur = parameters.blur
@@ -247,7 +247,6 @@ extension Kirakira.Parameters: Decodable {
         case startAngle
         case sparkleAmount
         case frameRate
-        case sparkleScale
         case targetDimension
     }
 
@@ -272,7 +271,6 @@ extension Kirakira.Parameters: Decodable {
         startAngle = try container.decodeParamValue(Int.self, forKey: .startAngle)
         sparkleAmount = try container.decodeParamValue(Float.self, forKey: .sparkleAmount)
         frameRate = try container.decodeParamValue(Float.self, forKey: .frameRate)
-        sparkleScale = try container.decodeParamValue(Float.self, forKey: .sparkleScale)
         targetDimension = try container.decodeParamValue(Int.self, forKey: .targetDimension)
     }
 }
