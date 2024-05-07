@@ -151,6 +151,9 @@ public class Kirakira: OperationGroup {
     public var frameRate: Float = 60 {
         didSet { sparklesEffect.frameRate = frameRate }
     }
+    public var time: Float = 0 {
+        didSet { sparklesEffect.time = time }
+    }
     // For the blur effect
     public var blur: Int = 0 {
         didSet { blurEffect.blurRadiusInPixels = Float(blur) }
