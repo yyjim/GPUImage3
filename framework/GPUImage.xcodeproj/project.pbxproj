@@ -409,6 +409,10 @@
 		BCFCD46720FCE91200560BC9 /* DissolveBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */; };
 		BCFCD46820FCE91200560BC9 /* DissolveBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */; };
 		BCFCD46920FCE91800560BC9 /* DissolveBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCD46420FCE83500560BC9 /* DissolveBlend.swift */; };
+		FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
+		FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */; };
+		FBE32DE62760CA9400DDDE68 /* UnsharpMask.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */; };
+		FBE32DE72760CA9400DDDE68 /* UnsharpMask.metal in Sources */ = {isa = PBXBuildFile; fileRef = FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -619,6 +623,8 @@
 		BCE0BE9D20D6E3C80006E120 /* ImageOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageOrientation.swift; path = Source/ImageOrientation.swift; sourceTree = "<group>"; };
 		BCFCD46420FCE83500560BC9 /* DissolveBlend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DissolveBlend.swift; path = Source/Operations/DissolveBlend.swift; sourceTree = "<group>"; };
 		BCFCD46620FCE91200560BC9 /* DissolveBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = DissolveBlend.metal; path = Source/Operations/DissolveBlend.metal; sourceTree = "<group>"; };
+		FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsharpMask.swift; path = Source/Operations/UnsharpMask.swift; sourceTree = "<group>"; };
+		FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = UnsharpMask.metal; path = Source/Operations/UnsharpMask.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -670,6 +676,8 @@
 				79DD50D2213458BA004EF308 /* PolkaDot.metal */,
 				4C280F75213426D6001A985C /* Posterize.swift */,
 				4C280F78213426EC001A985C /* Posterize.metal */,
+				FBE32DE32760CA9400DDDE68 /* UnsharpMask.metal */,
+				FBE32DE22760CA9400DDDE68 /* UnsharpMask.swift */,
 				796B989D238333120013FBD0 /* Sharpen.swift */,
 				796B98A0238333200013FBD0 /* Sharpen.metal */,
 				795ECAA721ED2967000EF927 /* Sketch.swift */,
@@ -1134,6 +1142,7 @@
 				4C280F76213426D6001A985C /* Posterize.swift in Sources */,
 				79CB6E112109311C0042F87B /* MultiplyBlend.metal in Sources */,
 				BC7BA28420F59C8E006B5F4B /* MonochromeFilter.metal in Sources */,
+				FBE32DE42760CA9400DDDE68 /* UnsharpMask.swift in Sources */,
 				79CB6E20210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B742125CBD50049135E /* AmatorkaFilter.swift in Sources */,
 				793D932920F66C5C008A7A6E /* ColorInversion.swift in Sources */,
@@ -1195,6 +1204,7 @@
 				795ECA9F21ED22BA000EF927 /* SobelEdgeDetection.metal in Sources */,
 				7954BF4322148C94008402A6 /* HalfTone.metal in Sources */,
 				BCCFEA6422AEEDDB00C9F4CC /* PictureInput.swift in Sources */,
+				FBE32DE62760CA9400DDDE68 /* UnsharpMask.metal in Sources */,
 				7954BF4F2214A78E008402A6 /* SphereRefraction.metal in Sources */,
 				793D934420F693B8008A7A6E /* GammaAdjustment.metal in Sources */,
 				4CC48C012134440900817C34 /* Solarize.metal in Sources */,
@@ -1339,6 +1349,7 @@
 				4C280F77213426D6001A985C /* Posterize.swift in Sources */,
 				79CB6E122109311C0042F87B /* MultiplyBlend.metal in Sources */,
 				BCE0BE9F20D6E3C80006E120 /* Color.swift in Sources */,
+				FBE32DE52760CA9400DDDE68 /* UnsharpMask.swift in Sources */,
 				79CB6E21210A07F30042F87B /* SaturationBlend.swift in Sources */,
 				79EB1B752125CBD50049135E /* AmatorkaFilter.swift in Sources */,
 				793D932A20F66C5C008A7A6E /* ColorInversion.swift in Sources */,
@@ -1400,6 +1411,7 @@
 				BC5193B22208F2CA00DD18F6 /* Pixellate.swift in Sources */,
 				795ECAA021ED22BA000EF927 /* SobelEdgeDetection.metal in Sources */,
 				BCCFEA6522AEEDDB00C9F4CC /* PictureInput.swift in Sources */,
+				FBE32DE72760CA9400DDDE68 /* UnsharpMask.metal in Sources */,
 				7954BF4422148C94008402A6 /* HalfTone.metal in Sources */,
 				7954BF502214A78E008402A6 /* SphereRefraction.metal in Sources */,
 				BC7BA29320F6F2C7006B5F4B /* BrightnessAdjustment.swift in Sources */,
